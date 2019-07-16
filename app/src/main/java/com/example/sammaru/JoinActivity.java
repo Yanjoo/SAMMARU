@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.example.sammaru.fragment.CustomerJoinFragment;
 import com.example.sammaru.fragment.DeliveryJoinFragment;
 
+// test
 public class JoinActivity extends AppCompatActivity {
 
     DeliveryJoinFragment deliveryJoinFragment;
