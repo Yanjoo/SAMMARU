@@ -10,6 +10,7 @@ import com.example.sammaru.fragment.CustomerJoinFragment;
 import com.example.sammaru.fragment.DeliveryJoinFragment;
 
 // test
+// DooHee
 public class JoinActivity extends AppCompatActivity {
 
     DeliveryJoinFragment deliveryJoinFragment;
