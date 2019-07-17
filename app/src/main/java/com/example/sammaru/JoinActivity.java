@@ -11,6 +11,7 @@ import com.example.sammaru.fragment.DeliveryJoinFragment;
 
 // test
 // DooHee
+// Hanju
 public class JoinActivity extends AppCompatActivity {
 
     DeliveryJoinFragment deliveryJoinFragment;
