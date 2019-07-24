@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.CustomerMainActivity">
+    tools:context=".CustomerMainActivity">
 
     <FrameLayout
+        android:id="@+id/customer_main_activity_framelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/main_activity_navigation2">
+        android:layout_above="@id/customer_main_activity_navigation">
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/main_activity_navigation2"
+        android:id="@+id/customer_main_activity_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

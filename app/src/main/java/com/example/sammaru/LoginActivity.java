@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // DeliveryMainActivity 실행
-                startActivity(new Intent(LoginActivity.this, DeliveryMainActivity.class));
+                startActivity(new Intent(LoginActivity.this, CustomerMainActivity.class));
                 finish();
             }
         });
