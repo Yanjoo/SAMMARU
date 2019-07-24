@@ -1,4 +1,4 @@
-package com.example.sammaru.fragment;
+package com.example.sammaru.customer;
 
 
 import android.os.Bundle;
@@ -13,15 +13,12 @@ import com.example.sammaru.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * 상품 목록 프래그먼트
+ * 고객이 주문한 상품들을 리스트 형식으로 보여준다.
+ * 고객이 최근에 주문한 상품이 위쪽으로 오도록 정렬해야 한다.
+ * 상품 클릭 시 배송하는 기사님과 대화방으로 연결이 되야한다.
  */
 public class DeliveryListFragment extends Fragment {
-
-
-    public DeliveryListFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

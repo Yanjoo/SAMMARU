@@ -1,4 +1,4 @@
-package com.example.sammaru.fragment;
+package com.example.sammaru.login;
 
 import android.os.Bundle;
 
@@ -10,13 +10,15 @@ import android.view.ViewGroup;
 
 import com.example.sammaru.R;
 
-public class CustomerListFragment extends Fragment {
+
+public class DeliveryJoinFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_list, container, false);
+        return inflater.inflate(R.layout.fragment_delivery_join, container, false);
     }
+
 
 }

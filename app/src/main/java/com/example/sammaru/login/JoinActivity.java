@@ -1,4 +1,4 @@
-package com.example.sammaru;
+package com.example.sammaru.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.sammaru.fragment.CustomerJoinFragment;
-import com.example.sammaru.fragment.DeliveryJoinFragment;
+import com.example.sammaru.R;
 
 // test
 // DooHee

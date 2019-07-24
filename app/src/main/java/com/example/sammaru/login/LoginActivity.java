@@ -1,4 +1,4 @@
-package com.example.sammaru;
+package com.example.sammaru.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.sammaru.R;
+import com.example.sammaru.customer.CustomerMainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
