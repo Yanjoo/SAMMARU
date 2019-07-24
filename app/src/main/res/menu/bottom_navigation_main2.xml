@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_customer_list"
+        android:id="@+id/action_delivery_list"
         android:icon="@drawable/list"
-        android:title="고객 목록"
+        android:title="배송 목록"
+        />
+
+    <item
+        android:id="@+id/action_lookup"
+        android:icon="@drawable/lookup"
+        android:title="배송 조회"
         />
 
     <item
