@@ -16,11 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp">
+
         <EditText
             android:id="@+id/login_activity_editText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="아이디"/>
+            android:hint="ID" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
