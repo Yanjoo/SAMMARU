@@ -19,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  *
  */
 
+//
 public class CustomerMainActivity extends AppCompatActivity {
 
     @Override
