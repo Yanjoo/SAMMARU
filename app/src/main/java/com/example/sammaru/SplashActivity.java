@@ -16,8 +16,8 @@ import com.example.sammaru.login.LoginActivity;
  * Google Firebase 연동 필요
  * */
 
-
 // design 브랜치
+
 
 public class SplashActivity extends AppCompatActivity {
 
