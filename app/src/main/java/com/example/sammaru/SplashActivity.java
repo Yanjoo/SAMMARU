@@ -17,6 +17,7 @@ import com.example.sammaru.login.LoginActivity;
  * */
 
 // delivery check
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
