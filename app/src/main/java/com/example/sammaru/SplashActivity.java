@@ -16,7 +16,8 @@ import com.example.sammaru.login.LoginActivity;
  * Google Firebase 연동 필요
  * */
 
-// 강민규 test
+//강민규 test
+// 깃허브 브랜치 생성
 public class SplashActivity extends AppCompatActivity {
 
     @Override
