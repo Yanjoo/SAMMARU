@@ -16,7 +16,7 @@ import com.example.sammaru.login.LoginActivity;
  * Google Firebase 연동 필요
  * */
 
-// delivery check
+// chat
 
 public class SplashActivity extends AppCompatActivity {
 
