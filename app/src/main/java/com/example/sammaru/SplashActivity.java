@@ -17,7 +17,7 @@ import com.example.sammaru.login.LoginActivity;
  * */
 
 //강민규 test
-// 깃허브 브랜치 생성
+// 깃허브 브랜치 생성 1
 public class SplashActivity extends AppCompatActivity {
 
     @Override
