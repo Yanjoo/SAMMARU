@@ -15,11 +15,16 @@
         android:id="@+id/delivery_main_activity_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_navigation_delivery_main"
-        app:itemBackground="@color/colorPrimary"
-        app:itemTextColor="@android:color/white"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="#012E52"
+        app:itemBackground="#012E52"
         app:itemIconTint="@android:color/white"
-        />
+        app:itemTextColor="@android:color/white"
+        app:menu="@menu/bottom_navigation_delivery_main" />
 
 </RelativeLayout>

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/login_activity_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/loading"
-        />
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="155dp"
+        app:srcCompat="@drawable/logo" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp">
 
@@ -21,36 +21,45 @@
             android:id="@+id/login_activity_editText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID" />
+            android:hint="ID"
+            android:textColorHighlight="#E1633B"
+            android:textColorLink="#E1633B"
+            android:textCursorDrawable="#E1633B" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp">
+
         <EditText
             android:id="@+id/login_activity_editText_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="패스워드"/>
+            android:hint="패스워드"
+            android:textColorHighlight="#E1633B"
+            android:textColorLink="#E1633B"
+            android:textCursorDrawable="#E1633B" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/login_activity_button_login"
-        android:layout_width="match_parent"
+        android:layout_width="259dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="@color/colorPrimary"
+        android:background="#012E52"
         android:text="로그인"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/login_activity_button_join"
-        android:layout_width="match_parent"
+        android:layout_width="259dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="@color/colorPrimary"
+        android:background="#012E52"
         android:text="회원가입"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
 </LinearLayout>
