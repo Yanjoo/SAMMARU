@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "Delivery_array">
+        <item>DHL</item>
+        <item>천일택배</item>
+        <item>CJ대한통운</item>
+        <item>CU편의점 택배</item>
+        <item>GS Postbox 택배</item>
+        <item>CWAY</item>
+        <item>대신택배</item>
+        <item>우체국 택배</item>
+        <item>한의사랑택배</item>
+        <item>한진택배</item>
+        <item>합동택배</item>
+        <item>홈픽</item>
+        <item>한서호남택배</item>
+        <item>일양로지스</item>
+        <item>경동택배</item>
+        <item>건영택배</item>
+        <item>로젠택배</item>
+        <item>롯데택배</item>
+        <item>SLX</item>
+        <item>TNT</item>
+        <item>EMS</item>
+        <item>Fedex</item>
+        <item>UPS</item>
+        <item>USPS</item>
+
+
+    </string-array>
+</resources>

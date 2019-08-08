@@ -19,7 +19,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#012E52"
+<<<<<<< HEAD
         app:itemBackground="#012E52"
+=======
+
+>>>>>>> origin/Chat
         app:itemHorizontalTranslationEnabled="false"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"
