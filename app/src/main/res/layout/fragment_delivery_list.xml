@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".customer.DeliveryListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="배송 목록 프래그먼트" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="배송 조회 프래그먼트" />
+
 
 </FrameLayout>
