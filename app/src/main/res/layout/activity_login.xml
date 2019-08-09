@@ -10,7 +10,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="155dp"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/loading" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="260dp"
@@ -22,9 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ID"
-            android:textColorHighlight="#E1633B"
-            android:textColorLink="#E1633B"
-            android:textCursorDrawable="#E1633B" />
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -37,9 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="패스워드"
-            android:textColorHighlight="#E1633B"
-            android:textColorLink="#E1633B"
-            android:textCursorDrawable="#E1633B" />
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -47,7 +43,7 @@
         android:layout_width="259dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="#012E52"
+        android:background="@color/colorPrimary"
         android:text="로그인"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
@@ -57,7 +53,7 @@
         android:layout_width="259dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="#012E52"
+        android:background="@color/colorPrimary"
         android:text="회원가입"
         android:textColor="@android:color/white"
         android:textSize="18sp" />

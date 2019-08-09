@@ -10,11 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="배송 조회 프래그먼트" />
-
         <Spinner
             android:id="@+id/fragment_lookup_spinner"
             android:layout_width="match_parent"
@@ -25,7 +20,7 @@
             android:id="@+id/fragment_lookup_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:hint="송장번호 입력"
             android:inputType="number" />
 
         <Button

@@ -21,7 +21,7 @@
         android:layout_width="319dp"
         android:layout_height="178dp"
         android:visibility="visible"
-        app:srcCompat="@drawable/logo"
+        app:srcCompat="@drawable/loading"
         tools:layout_editor_absoluteX="46dp"
         tools:layout_editor_absoluteY="276dp" />
 
