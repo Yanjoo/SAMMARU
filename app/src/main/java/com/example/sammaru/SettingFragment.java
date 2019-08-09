@@ -1,12 +1,12 @@
 package com.example.sammaru;
 
-import android.os.Bundle;
+        import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+        import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
 
 /**
  * 이 프래그먼트는 설정 프래그먼트이다
