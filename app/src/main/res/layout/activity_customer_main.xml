@@ -18,14 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#012E52"
-<<<<<<< HEAD
-        app:itemBackground="#012E52"
-=======
 
->>>>>>> origin/Chat
-        app:itemHorizontalTranslationEnabled="false"
         app:itemIconTint="@android:color/white"
+        app:itemBackground="@color/colorPrimary"
         app:itemTextColor="@android:color/white"
         app:menu="@menu/bottom_navigation_customer_main" />
 

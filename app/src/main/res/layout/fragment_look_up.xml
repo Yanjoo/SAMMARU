@@ -25,7 +25,7 @@
             android:id="@+id/fragment_lookup_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+
             android:inputType="number" />
 
         <Button
