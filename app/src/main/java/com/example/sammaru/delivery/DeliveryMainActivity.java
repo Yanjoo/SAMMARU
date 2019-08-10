@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.sammaru.LookUpFragment;
 import com.example.sammaru.R;
 import com.example.sammaru.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,6 +38,12 @@ public class DeliveryMainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_settings:
                         fragment = new SettingFragment();
+                        break;
+                    case R.id.action_lookup:
+                        fragment = new LookUpFragment();
+                        break;
+                    case R.id.action_products_list:
+                        fragment = new ProductListFragment();
                         break;
                 }
                 return loadFragment(fragment);

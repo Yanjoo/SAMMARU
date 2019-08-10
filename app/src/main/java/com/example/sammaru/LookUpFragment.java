@@ -1,4 +1,4 @@
-package com.example.sammaru.customer;
+package com.example.sammaru;
 
 
 import android.content.Intent;
@@ -31,8 +31,6 @@ public class LookUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_look_up, container, false);
 
         Spinner spinner = rootView.findViewById(R.id.fragment_lookup_spinner);
@@ -81,14 +79,11 @@ public class LookUpFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                //textView.setText(edittext.getText());
                 Uri gotoDelivery = Uri.parse(getDelivery_normalset+delivery_company + editText.getText());
                 Intent goDelivery = new Intent(Intent.ACTION_VIEW, gotoDelivery);
                 startActivity(goDelivery);
             }
         });
-
-
         return rootView;
     }
 

@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.sammaru.R;
 import com.example.sammaru.customer.CustomerMainActivity;
+import com.example.sammaru.delivery.DeliveryMainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // DeliveryMainActivity 실행
-                startActivity(new Intent(LoginActivity.this, CustomerMainActivity.class));
+                startActivity(new Intent(LoginActivity.this, DeliveryMainActivity.class));
                 finish();
             }
         });
