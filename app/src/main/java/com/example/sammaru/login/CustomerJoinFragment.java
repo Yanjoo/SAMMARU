@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.sammaru.R;
 import com.example.sammaru.model.CustomerModel;
@@ -46,10 +47,12 @@ public class CustomerJoinFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 회원가입 양식을 빼먹었을 경우 회원가입 안됨
+                // 회원가입 양식을 빼먹었을 경우 회원가입 안됨, 실패시 안되는 이유 설명 추가
                 if (email.getText().toString() == null || pw.getText().toString() == null || name.getText().toString() == null || phone.getText().toString() == null) {
                     return;
                 }
+
+                Toast.makeText(getContext(), "회원가입 처리중...", Toast.LENGTH_SHORT).show();
 
                 FirebaseAuth.getInstance()
                         .createUserWithEmailAndPassword(email.getText().toString(), pw.getText().toString())
@@ -66,6 +69,7 @@ public class CustomerJoinFragment extends Fragment {
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(getContext(), "회원가입 성공!", Toast.LENGTH_SHORT).show();
                                                 getActivity().finish();
                                             }
                                         });
