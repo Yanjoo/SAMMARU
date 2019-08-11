@@ -4,16 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".login.DeliveryJoinFragment">
+    tools:context=".login.CourierJoinFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp">
         <EditText
-            android:id="@+id/fragment_delivery_join_email"
+            android:id="@+id/fragment_courier_join_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             android:hint="이메일"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -22,10 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp">
         <EditText
-            android:id="@+id/fragment_delivery_join_password"
+            android:id="@+id/fragment_courier_join_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="pw"/>
+            android:hint="비밀번호"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp">
         <EditText
-            android:id="@+id/fragment_delivery_join_name"
+            android:id="@+id/fragment_courier_join_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="이름"/>
@@ -44,25 +45,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp">
         <EditText
-            android:id="@+id/fragment_delivery_join_phone"
+            android:id="@+id/fragment_courier_join_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="phone"
             android:hint="전화번호"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/fragment_delivery_join_company"
+        android:id="@+id/fragment_courier_join_company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="택배회사 선택"/>
-
-    <Button
-        android:id="@+id/fragment_delivery_join_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="배송지역 선택"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -72,20 +67,17 @@
         android:layout_margin="8dp">
 
         <Button
-            android:id="@+id/fragment_delivery_submit"
+            android:id="@+id/fragment_courier_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:text="회원가입"/>
 
         <Button
-            android:id="@+id/fragment_delivery_cancel"
+            android:id="@+id/fragment_courier_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:text="취소"/>
     </LinearLayout>
-
-
-
 </LinearLayout>

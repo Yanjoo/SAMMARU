@@ -13,19 +13,20 @@ import com.example.sammaru.R;
 // Hanju
 public class JoinActivity extends AppCompatActivity {
 
-    DeliveryJoinFragment deliveryJoinFragment;
+    CourierJoinFragment courierJoinFragment;
     CustomerJoinFragment customerJoinFragment;
 
-    ImageView deliveryImageView;
+    ImageView courierImageView;
     ImageView customerImageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
-        deliveryImageView = findViewById(R.id.activity_join_deliveryImageView);
-        deliveryImageView.setOnClickListener(new View.OnClickListener() {
+        courierImageView = findViewById(R.id.activity_join_courierImageView);
+        courierImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onFragmentChanged(0);
@@ -40,7 +41,7 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-        deliveryJoinFragment = new DeliveryJoinFragment();
+        courierJoinFragment = new CourierJoinFragment();
         customerJoinFragment = new CustomerJoinFragment();
         onFragmentChanged(0);
     }
@@ -48,11 +49,15 @@ public class JoinActivity extends AppCompatActivity {
     public void onFragmentChanged(int index) {
         switch(index) {
             case 0:
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_join_frame_layout, deliveryJoinFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_join_frame_layout, courierJoinFragment).commit();
+                courierImageView.setImageResource(R.drawable.courier);
+                customerImageView.setImageResource(R.drawable.user_transparent);
                 break;
 
             case 1:
                 getSupportFragmentManager().beginTransaction().replace(R.id.activity_join_frame_layout, customerJoinFragment).commit();
+                courierImageView.setImageResource(R.drawable.courier_transparent);
+                customerImageView.setImageResource(R.drawable.user);
                 break;
 
                 default:

@@ -12,6 +12,7 @@
             android:id="@+id/fragment_customer_join_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             android:hint="이메일"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -23,7 +24,7 @@
             android:id="@+id/fragment_customer_join_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="pw"/>
+            android:hint="비밀번호"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -45,6 +46,7 @@
             android:id="@+id/fragment_customer_join_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="phone"
             android:hint="전화번호"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,14 +65,14 @@
         android:layout_margin="8dp">
 
         <Button
-            android:id="@+id/fragment_customer_submit"
+            android:id="@+id/fragment_customer_join_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:text="회원가입"/>
 
         <Button
-            android:id="@+id/fragment_customer_cancel"
+            android:id="@+id/fragment_customer_join_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"

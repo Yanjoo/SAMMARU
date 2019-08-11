@@ -1,4 +1,4 @@
-package com.example.sammaru.delivery;
+package com.example.sammaru.courier;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,15 +19,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  *
  */
 
-public class DeliveryMainActivity extends AppCompatActivity {
+public class CourierMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delivery_main);
+        setContentView(R.layout.activity_courier_main);
 
         // 네비게이션 뷰 클릭 이벤트
-        BottomNavigationView navView = findViewById(R.id.delivery_main_activity_navigation);
+        BottomNavigationView navView = findViewById(R.id.courier_main_activity_navigation);
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -49,13 +49,13 @@ public class DeliveryMainActivity extends AppCompatActivity {
                 return loadFragment(fragment);
             }
         });
-        getSupportFragmentManager().beginTransaction().add(R.id.delivery_main_activity_framelayout, new CustomerListFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.courier_main_activity_framelayout, new CustomerListFragment()).commit();
     }
 
     // 네비게이션 뷰 클릭시 해당하는 프래그먼트 로딩
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.delivery_main_activity_framelayout, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.courier_main_activity_framelayout, fragment).commit();
             return true;
         }
         return false;

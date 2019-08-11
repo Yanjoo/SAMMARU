@@ -5,14 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
-        android:id="@+id/delivery_main_activity_framelayout"
+        android:id="@+id/courier_main_activity_framelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/delivery_main_activity_navigation">
+        android:layout_above="@id/courier_main_activity_navigation">
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/delivery_main_activity_navigation"
+        android:id="@+id/courier_main_activity_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -20,6 +20,6 @@
         app:itemIconTint="@android:color/white"
         app:itemBackground="@color/colorPrimary"
         app:itemTextColor="@android:color/white"
-        app:menu="@menu/bottom_navigation_delivery_main" />
+        app:menu="@menu/bottom_navigation_courier_main" />
 
 </RelativeLayout>

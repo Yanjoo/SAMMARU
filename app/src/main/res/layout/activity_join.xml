@@ -14,7 +14,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/activity_join_deliveryImageView"
+                android:id="@+id/activity_join_courierImageView"
                 android:layout_width="141dp"
                 android:layout_height="157dp"
                 android:layout_marginLeft="40dp"

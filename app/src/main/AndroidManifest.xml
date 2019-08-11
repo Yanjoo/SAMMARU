@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sammaru">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/loading"
@@ -12,7 +14,7 @@
         <activity android:name=".customer.CustomerMainActivity"></activity>
         <activity android:name=".login.JoinActivity" />
         <activity android:name=".login.LoginActivity" />
-        <activity android:name=".delivery.DeliveryMainActivity" />
+        <activity android:name=".courier.CourierMainActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import com.example.sammaru.R;
 
 
-public class DeliveryJoinFragment extends Fragment {
+public class CourierJoinFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_delivery_join, container, false);
+        return inflater.inflate(R.layout.fragment_courier_join, container, false);
     }
 
 
