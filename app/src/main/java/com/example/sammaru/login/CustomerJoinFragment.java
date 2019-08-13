@@ -48,7 +48,9 @@ public class CustomerJoinFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // 회원가입 양식을 빼먹었을 경우 회원가입 안됨, 실패시 안되는 이유 설명 추가
-                if (email.getText().toString() == null || pw.getText().toString() == null || name.getText().toString() == null || phone.getText().toString() == null) {
+                if (email.getText().toString().contentEquals("") || pw.getText().toString().contentEquals("")
+                        || name.getText().toString().contentEquals("") || phone.getText().toString().contentEquals("")) {
+                    Toast.makeText(getActivity(), "양식을 다 채워주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
