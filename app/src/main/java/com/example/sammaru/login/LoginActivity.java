@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,19 +31,27 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText id;
     private EditText password;
+    private CheckBox autoLogin;
+    private CheckBox rememberEmail;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
 
     private int loginIdentifier;
 
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        sharedPreferences = getSharedPreferences("loginFile", MODE_PRIVATE);
+
         id = findViewById(R.id.login_activity_editText_id);
         password = findViewById(R.id.login_activity_editText_password);
+        autoLogin = findViewById(R.id.activity_login_auto_login_checkbox);
+        rememberEmail = findViewById(R.id.activity_login_remember_email_checkbox);
 
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -119,5 +129,37 @@ public class LoginActivity extends AppCompatActivity {
                 default:
                     break;
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(sharedPreferences.getString("remember", "").contentEquals("1")) {
+            id.setText(sharedPreferences.getString("email", ""));
+            rememberEmail.setChecked(true);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        if (autoLogin.isChecked()) {
+            String email = id.getText().toString();
+            editor.putString("email", email);
+            String password = this.password.getText().toString();
+            editor.putString("password", password);
+            editor.commit();
+        }
+
+        if (rememberEmail.isChecked()) {
+            String email = id.getText().toString();
+            editor.putString("email", email);
+            editor.putString("remember", "1");
+            editor.commit();
+        }
+
     }
 }
