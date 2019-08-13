@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sammaru.R;
-import com.example.sammaru.model.CustomerModel;
+import com.example.sammaru.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -60,12 +60,13 @@ public class CustomerJoinFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 final String uid = task.getResult().getUser().getUid();
-                                CustomerModel customerModel = new CustomerModel();
-                                customerModel.setName(name.getText().toString());
-                                customerModel.setUid(uid);
-                                customerModel.setPhone(phone.getText().toString());
+                                UserModel userModel = new UserModel();
+                                userModel.setUid(uid);
+                                userModel.setName(name.getText().toString());
+                                userModel.setPhone(phone.getText().toString());
+                                userModel.setIdentifier(1); // 고객일 경우 구분자 1
 
-                                FirebaseDatabase.getInstance().getReference().child("users").child("customers").child(uid).setValue(customerModel)
+                                FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {

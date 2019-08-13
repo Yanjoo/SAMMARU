@@ -13,8 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sammaru.R;
-import com.example.sammaru.model.CourierModel;
-import com.example.sammaru.model.CustomerModel;
+import com.example.sammaru.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -60,13 +59,14 @@ public class CourierJoinFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 final String uid = task.getResult().getUser().getUid();
-                                CourierModel courierModel = new CourierModel();
-                                courierModel.setName(name.getText().toString());
-                                courierModel.setUid(uid);
-                                courierModel.setPhone(phone.getText().toString());
 
+                                UserModel userModel = new UserModel();
+                                userModel.setUid(uid);
+                                userModel.setName(name.getText().toString());
+                                userModel.setPhone(phone.getText().toString());
+                                userModel.setIdentifier(2); // 배달원일 경우 구분자 2
 
-                                FirebaseDatabase.getInstance().getReference().child("users").child("couriers").child(uid).setValue(courierModel)
+                                FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
