@@ -39,9 +39,6 @@ public class CourierMainActivity extends AppCompatActivity {
                     case R.id.action_settings:
                         fragment = new SettingFragment();
                         break;
-                    case R.id.action_lookup:
-                        fragment = new LookUpFragment();
-                        break;
                     case R.id.action_products_list:
                         fragment = new ProductListFragment();
                         break;

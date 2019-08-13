@@ -13,12 +13,6 @@
         />
 
     <item
-        android:id="@+id/action_lookup"
-        android:icon="@drawable/lookup"
-        android:title="배송 조회"
-        />
-
-    <item
         android:id="@+id/action_settings"
         android:icon="@drawable/settings"
         android:title="설정"

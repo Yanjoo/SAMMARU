@@ -24,11 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * 이 액티비티에서는 구글 파이어베이스에 계정이 있는지 확인하고
- * 계정이 있으면 자동 로그인 후 MainActivity로 넘어가게 하고
- * 없다면 LoginActivity로 넘어가서 회원가입 또는 로그인을 진행하도록 한다.
- *
- * Google Firebase 연동 필요
+ * 자동 로그인
  * */
 
 public class SplashActivity extends AppCompatActivity {
