@@ -13,6 +13,7 @@
         android:layout_above="@id/customer_main_activity_navigation">
     </FrameLayout>
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/customer_main_activity_navigation"
         android:layout_width="match_parent"

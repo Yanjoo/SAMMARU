@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.sammaru.LookUpFragment;
 import com.example.sammaru.R;
 import com.example.sammaru.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

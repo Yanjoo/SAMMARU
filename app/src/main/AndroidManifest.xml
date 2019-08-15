@@ -11,14 +11,13 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".customer.CustomerMainActivity"></activity>
+        <activity android:name=".customer.CustomerMainActivity"/>
         <activity android:name=".login.JoinActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".courier.CourierMainActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

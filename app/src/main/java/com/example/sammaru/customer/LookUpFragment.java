@@ -1,4 +1,4 @@
-package com.example.sammaru;
+package com.example.sammaru.customer;
 
 
 import android.content.Intent;

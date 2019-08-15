@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.sammaru.LookUpFragment;
 import com.example.sammaru.R;
 import com.example.sammaru.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -23,10 +22,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 //
 public class CustomerMainActivity extends AppCompatActivity {
 
+    Fragment deliveryListFragment;
+    Fragment lookUpFragment;
+    Fragment settingFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
+
+        deliveryListFragment = new DeliveryListFragment();
+        lookUpFragment = new LookUpFragment();
+        settingFragment = new SettingFragment();
 
         // 네비게이션 뷰 클릭 시 프래그먼트 이동 이벤트
         BottomNavigationView navView = findViewById(R.id.customer_main_activity_navigation);
@@ -36,19 +43,19 @@ public class CustomerMainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (menuItem.getItemId()) {
                     case R.id.action_delivery_list:
-                        fragment = new DeliveryListFragment();
+                        fragment = deliveryListFragment;
                         break;
                     case R.id.action_lookup:
-                        fragment = new LookUpFragment();
+                        fragment = lookUpFragment;
                         break;
                     case R.id.action_settings:
-                        fragment = new SettingFragment();
+                        fragment = settingFragment;
                         break;
                 }
                 return loadFragment(fragment);
             }
         });
-        getSupportFragmentManager().beginTransaction().add(R.id.customer_main_activity_framelayout, new DeliveryListFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.customer_main_activity_framelayout, deliveryListFragment).commit();
     }
 
     // 네비게이션 뷰 클릭 시 해당하는 프래그먼트를 불러옴
