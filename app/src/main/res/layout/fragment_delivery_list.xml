@@ -15,8 +15,11 @@
         android:id="@+id/fragment_delivery_list_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:layout_gravity="bottom|right" />
+        android:src="@drawable/upload"
+        app:backgroundTint="#FF9800"
+        app:fabSize="normal"
+        app:rippleColor="#FFFFFF" />
 
 </FrameLayout>
