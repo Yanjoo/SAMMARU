@@ -1,19 +1,11 @@
 package com.example.sammaru.model;
 
 public class ProductModel {
-    private String productName;
-    private String url;
-    private String owner;
-    private String address;
-    private String uid;
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+    public String productName;
+    public String url;
+    public String owner;
+    public String address;
+    public String uid;
 
     public String getProductName() {
         return productName;
@@ -45,5 +37,13 @@ public class ProductModel {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

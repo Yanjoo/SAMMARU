@@ -1,12 +1,12 @@
 package com.example.sammaru.model;
 
 public class UserModel {
-    private String name;
-    private String uid;
-    private String phone;
-    private String address;
-    private String company;
-    private int identifier; // 1이면 고객 2이면 배달원
+    public String name;
+    public String uid;
+    public String phone;
+    public String address;
+    public String company;
+    public int identifier; // 1이면 고객 2이면 배달원
 
     public String getAddress() {
         return address;

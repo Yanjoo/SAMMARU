@@ -1,11 +1,14 @@
 package com.example.sammaru;
 
-        import android.content.Intent;
+import android.content.Context;
+import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.os.Bundle;
 
         import androidx.fragment.app.Fragment;
 
-        import android.view.LayoutInflater;
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.Button;
@@ -19,6 +22,7 @@ package com.example.sammaru;
  */
 
 public class SettingFragment extends Fragment {
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,6 +32,11 @@ public class SettingFragment extends Fragment {
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginFile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("password");
+                editor.commit();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().finish();
             }

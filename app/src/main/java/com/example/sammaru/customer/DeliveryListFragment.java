@@ -42,9 +42,7 @@ public class DeliveryListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_delivery_list, container, false);
-
         fab = rootView.findViewById(R.id.fragment_delivery_list_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +108,7 @@ public class DeliveryListFragment extends Fragment {
             public void onClick(View view) {
                 // 서버에 저장할 데이터
                 ProductModel productModel = new ProductModel();
-                productModel.setUrl(baseUrl + deliveryCompany + number.getText().toString());
+                productModel.setUid(baseUrl + deliveryCompany + number.getText().toString());
 
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 productModel.setUid(uid);
@@ -142,8 +140,6 @@ public class DeliveryListFragment extends Fragment {
         });
 
         dialog.show();
-
-
     }
 
 }
