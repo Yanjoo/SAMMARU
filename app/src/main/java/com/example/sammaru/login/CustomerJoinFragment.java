@@ -61,6 +61,7 @@ public class CustomerJoinFragment extends Fragment {
 
                 Toast.makeText(getContext(), "회원가입 처리중...", Toast.LENGTH_SHORT).show();
 
+                // 서버에 email과 password 등록
                 FirebaseAuth.getInstance()
                         .createUserWithEmailAndPassword(email.getText().toString(), pw.getText().toString())
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -73,12 +74,13 @@ public class CustomerJoinFragment extends Fragment {
                                 userModel.setPhone(phone.getText().toString());
                                 userModel.setIdentifier(1); // 고객일 경우 구분자 1
 
+                                // DB에 고객 데이터 저장
                                 FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Toast.makeText(getContext(), "회원가입 성공!", Toast.LENGTH_SHORT).show();
-                                                getActivity().finish();
+                                                getActivity().finish(); // 액티비티 종료
                                             }
                                         });
 

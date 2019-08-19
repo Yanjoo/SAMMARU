@@ -35,7 +35,10 @@ import java.util.List;
 
 /**
  * 배송 조회 프래그먼트
- * 아이템에 상품명 보이게 수정
+ *
+ * 기능 : 서버에서 유저에 해당하는 상품 들을 리스트로 보여줌, 클릭시 배송 조회 인터넷으로 연결
+ *
+ * 수정 사항 : 아이템에 상품명 보이게 수정
  */
 
 public class LookUpFragment extends Fragment {
@@ -45,6 +48,7 @@ public class LookUpFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_look_up, container, false);
 
+        // 리사이클러뷰로 아이템을 리스트로 보여줌
         RecyclerView recyclerView = rootView.findViewById(R.id.fragment_lookup_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
         recyclerView.setAdapter(new LookUpFragmentRecyclerViewAdapter());
@@ -54,13 +58,14 @@ public class LookUpFragment extends Fragment {
 
     class LookUpFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        List<ProductModel> productModels;
+        List<ProductModel> productModels;  // 서버에서 유저에 해당하는 배송상품을 담을 List
 
         public LookUpFragmentRecyclerViewAdapter() {
             productModels = new ArrayList<>();
-            final String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            Log.d("LookUpFragment", myUid);
 
+            final String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            // DB에서 유저에 해당하는 아이템들을 productModels에 저장
             FirebaseDatabase.getInstance().getReference().child("products").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -70,7 +75,6 @@ public class LookUpFragment extends Fragment {
                         for (DataSnapshot id : company.getChildren()) {
                             for (DataSnapshot item : id.getChildren()) {
                                 ProductModel productModel = item.getValue(ProductModel.class);
-                                Log.d("LookUpFragment", item.toString());
                                 if (productModel.getUid().equals(myUid)) {
                                     productModels.add(productModel);
                                 }

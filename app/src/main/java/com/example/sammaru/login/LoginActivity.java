@@ -37,9 +37,9 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
 
-    private int loginIdentifier;
+    private int loginIdentifier;    // 로그인 구분자 1:고객, 2:배달원
 
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;    // 이메일 기억에 사용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +75,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    // loginEvent : 서버에서 id, pw 검사 후 고객, 배달원 구분해서 mainActivity 실행
     private void loginEvent() {
+        // id, pw 공백 검사
         if (id.getText().toString().contentEquals("") || password.getText().toString().contentEquals("")) {
             Toast.makeText(this, "아이디와 비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // 서버에서 id, pw 정보 검사
         firebaseAuth.signInWithEmailAndPassword(id.getText().toString(), password.getText().toString())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -93,8 +96,8 @@ public class LoginActivity extends AppCompatActivity {
                                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                                         UserModel userModel = item.getValue(UserModel.class);
                                         if (userModel.getUid().equals(uid)) {
-                                            loginIdentifier = userModel.getIdentifier();
-                                            chooseActivity(loginIdentifier);
+                                            loginIdentifier = userModel.getIdentifier(); // 구분자 1: 고객, 2: 배달원
+                                            chooseActivity(loginIdentifier);    // 구분자에 따른 메인 액티비티 선택
                                         }
                                     }
                                 }
@@ -106,12 +109,14 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         }
                         else {
+                            // 로그인 실패시 원인을 보여줌
                             Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
+    // chooseActivity : MainActivity 선택
     private void chooseActivity(int loginIdentifier) {
         switch (loginIdentifier) {
             case 1:
@@ -135,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        // 이메일 기억 체크시 이메일을 불러옴
         if(sharedPreferences.getString("remember", "").contentEquals("1")) {
             id.setText(sharedPreferences.getString("email", ""));
             rememberEmail.setChecked(true);
@@ -144,8 +150,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        // 자동 로그인 체크
         if (autoLogin.isChecked()) {
             String email = id.getText().toString();
             editor.putString("email", email);
@@ -154,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.commit();
         }
 
+        // 이메일 기억 체크
         if (rememberEmail.isChecked()) {
             String email = id.getText().toString();
             editor.putString("email", email);

@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * 상품 목록 프래그먼트
+ *
  * 고객이 주문한 상품들을 리스트 형식으로 보여준다.
  * 고객이 최근에 주문한 상품이 위쪽으로 오도록 정렬해야 한다.
  * 상품 클릭 시 배송하는 기사님과 대화방으로 연결이 되야한다.
@@ -44,6 +45,8 @@ public class DeliveryListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_delivery_list, container, false);
+
+        // 플로팅 버튼 클릭 이벤트
         fab = rootView.findViewById(R.id.fragment_delivery_list_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,16 +57,14 @@ public class DeliveryListFragment extends Fragment {
         return rootView;
     }
 
-    // dialogShow : 플로팅 버튼 클릭 시 송장번호 등록 다이얼로그 생성
-    /**
-    * 상품명 직접 입력 받게 수정
-    */
+    // dialogShow : 플로팅 버튼 클릭 시 dialog_look_up_add 다이얼로그 생성
     private void dialogShow() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_look_up_add, null);
         builder.setView(view);
 
+        // 택배회사 목록을 보여줌
         Spinner spinner = view.findViewById(R.id.dialog_lookup_add_spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -102,11 +103,13 @@ public class DeliveryListFragment extends Fragment {
             }
         });
 
+        // 송장번호
         final EditText number = view.findViewById(R.id.dialog_lookup_add_editText);
 
         final AlertDialog dialog = builder.create();
         dialog.setTitle("택배 추가");
 
+        // 추가 버튼 클릭 이벤트
         Button add = view.findViewById(R.id.dialog_lookup_add_button_add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +137,7 @@ public class DeliveryListFragment extends Fragment {
             }
         });
 
+        // 취소 버튼 클릭 이벤트
         Button cancel = view.findViewById(R.id.dialog_lookup_add_button_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

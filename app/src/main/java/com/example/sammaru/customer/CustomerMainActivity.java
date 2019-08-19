@@ -58,7 +58,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.customer_main_activity_framelayout, deliveryListFragment).commit();
     }
 
-    // 네비게이션 뷰 클릭 시 해당하는 프래그먼트를 불러옴
+    // loadFragment : 네비게이션 뷰 클릭 시 해당하는 프래그먼트를 불러옴
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.customer_main_activity_framelayout, fragment).commit();

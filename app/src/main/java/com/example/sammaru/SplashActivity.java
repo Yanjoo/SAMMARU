@@ -49,6 +49,7 @@ public class SplashActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        // 자동 로그인 데이터 불러옴
         sharedPreferences = getSharedPreferences("loginFile", MODE_PRIVATE);
         email = sharedPreferences.getString("email", "");
         password = sharedPreferences.getString("password", "");
