@@ -117,8 +117,6 @@ public class DeliveryListFragment extends Fragment {
                 int endIndex = deliveryCompany.indexOf('/');
                 String companyName = deliveryCompany.substring(startIndex, endIndex);
 
-                Log.d("DeliveryListFragment", companyName);
-
                 FirebaseDatabase.getInstance().getReference().child("products").child(companyName).child(uid).push().setValue(productModel)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

@@ -1,5 +1,6 @@
 package com.example.sammaru.login;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,11 +9,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.sammaru.R;
+import com.example.sammaru.model.ProductModel;
 import com.example.sammaru.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +33,9 @@ public class CourierJoinFragment extends Fragment {
     private EditText phone;
     private Button submit;
     private Button cancel;
+    private Button choiceCompany;
+
+    private UserModel userModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +48,16 @@ public class CourierJoinFragment extends Fragment {
         phone = rootView.findViewById(R.id.fragment_courier_join_phone);
         submit = rootView.findViewById(R.id.fragment_courier_join_submit);
         cancel = rootView.findViewById(R.id.fragment_courier_join_cancel);
+        choiceCompany = rootView.findViewById(R.id.fragment_courier_join_company);
+
+        choiceCompany.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
+
+        userModel = new UserModel();
 
         // 회원가입 버튼 클릭 이벤트
         submit.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +80,6 @@ public class CourierJoinFragment extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 final String uid = task.getResult().getUser().getUid();
 
-                                UserModel userModel = new UserModel();
                                 userModel.setUid(uid);
                                 userModel.setName(name.getText().toString());
                                 userModel.setPhone(phone.getText().toString());
@@ -93,5 +109,57 @@ public class CourierJoinFragment extends Fragment {
         return rootView;
     }
 
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_choice_company, null);
+        builder.setView(view);
+
+        final AlertDialog dialog = builder.create();
+        dialog.setTitle("택배 회사 선택");
+
+        view.findViewById(R.id.dialog_choice_company_cjlogistics).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userModel.setCompany("cjlogistics");
+                dialog.dismiss();
+            }
+        });
+        view.findViewById(R.id.dialog_choice_company_logen).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userModel.setCompany("logen");
+                dialog.dismiss();
+
+            }
+        });
+        view.findViewById(R.id.dialog_choice_company_lotte).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userModel.setCompany("lotte");
+                dialog.dismiss();
+
+            }
+        });
+        view.findViewById(R.id.dialog_choice_company_hanjin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userModel.setCompany("hanjin");
+                dialog.dismiss();
+
+            }
+        });
+        view.findViewById(R.id.dialog_choice_company_epost).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userModel.setCompany("epost");
+                dialog.dismiss();
+
+            }
+        });
+
+        dialog.show();
+
+    }
 
 }

@@ -101,7 +101,7 @@ public class LookUpFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ProductModel productModel = productModels.get(position);
-                    Uri gotoDelivery = Uri.parse(productModel.url);
+                    Uri gotoDelivery = Uri.parse(productModel.getUrl());
                     Intent goDelivery = new Intent(Intent.ACTION_VIEW, gotoDelivery);
                     startActivity(goDelivery);
                 }

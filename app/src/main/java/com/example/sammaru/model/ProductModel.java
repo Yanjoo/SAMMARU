@@ -1,11 +1,11 @@
 package com.example.sammaru.model;
 
 public class ProductModel {
-    public String productName;
-    public String url;
-    public String owner;
-    public String address;
-    public String uid;
+    private String productName;
+    private String url;
+    private String owner;
+    private String address;
+    private String uid;
 
     public String getProductName() {
         return productName;
