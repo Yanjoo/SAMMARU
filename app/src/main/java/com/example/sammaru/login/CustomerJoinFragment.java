@@ -21,6 +21,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * 고객 회원가입
+ *
+ * 기능 : 고객 회원가입 정보를 서버로 전달
+ */
+
 public class CustomerJoinFragment extends Fragment {
 
     private EditText email;
@@ -29,7 +35,6 @@ public class CustomerJoinFragment extends Fragment {
     private EditText phone;
     private Button submit;
     private Button cancel;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -24,6 +24,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * 배달원 회원가입 프래그먼트
+ *
+ * 기능 : 배달원 회원가입 정보를 서버로 전달
+ */
 
 public class CourierJoinFragment extends Fragment {
 
@@ -50,6 +55,7 @@ public class CourierJoinFragment extends Fragment {
         cancel = rootView.findViewById(R.id.fragment_courier_join_cancel);
         choiceCompany = rootView.findViewById(R.id.fragment_courier_join_company);
 
+        // 회사 선택 버튼 클릭 이벤트
         choiceCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +115,7 @@ public class CourierJoinFragment extends Fragment {
         return rootView;
     }
 
+    // showDialog : 회사 선택 다이얼로그 생성 후 실행
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
@@ -118,6 +125,7 @@ public class CourierJoinFragment extends Fragment {
         final AlertDialog dialog = builder.create();
         dialog.setTitle("택배 회사 선택");
 
+        // 회사 로고 클릭 시 발생하는 이벤트
         view.findViewById(R.id.dialog_choice_company_cjlogistics).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,7 +167,6 @@ public class CourierJoinFragment extends Fragment {
         });
 
         dialog.show();
-
     }
 
 }

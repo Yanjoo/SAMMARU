@@ -28,11 +28,11 @@ public class SettingFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_setting, container, false);
 
+        // 로그아웃 기능
         Button logout_button = rootView.findViewById(R.id.fragment_setting_logout_button);
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginFile", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.remove("password");

@@ -1,11 +1,15 @@
 package com.example.sammaru.model;
 
+/**
+ * 배송 상품 모델
+ */
+
 public class ProductModel {
-    private String productName;
-    private String url;
-    private String owner;
-    private String address;
-    private String uid;
+    private String productName;  // 상품명
+    private String url;          // 배송조회 url
+    private String owner;        // 고객
+    private String address;      // 고객 주소
+    private String uid;          // 고객 uid 채팅에서 사용
 
     public String getProductName() {
         return productName;

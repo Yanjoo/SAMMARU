@@ -35,8 +35,7 @@ import java.util.List;
 
 /**
  * 배송 조회 프래그먼트
- * 송장번호를 입력하면 배송 위치를 알려준다 (인터넷으로 연결 또는 직접 레이아웃 구현?)
- *
+ * 아이템에 상품명 보이게 수정
  */
 
 public class LookUpFragment extends Fragment {

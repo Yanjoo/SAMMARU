@@ -1,11 +1,16 @@
 package com.example.sammaru.model;
 
+/**
+ * 어플 사용자 모델
+ * 구분자 1 : 고객, 2: 배송원
+ */
+
 public class UserModel {
-    private String name;
-    private String uid;
-    private String phone;
-    private String address;
-    private String company;
+    private String name;    // 사용자 이름
+    private String uid;     // 사용자 uid
+    private String phone;   // 사용자 전화번호
+    private String address; // 사용자 주소 (배달원 null)
+    private String company; // 사용자 회사 (고객 null)
     private int identifier; // 1이면 고객 2이면 배달원
 
     public String getAddress() {

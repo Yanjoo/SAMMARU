@@ -24,12 +24,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * 자동 로그인
+ * 스플래시 액티비티
+ * 기능 : 자동 로그인
  * */
 
 public class SplashActivity extends AppCompatActivity {
 
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;    // 아이디와 비밀번호 저장
 
     private String email;
     private String password;
@@ -41,6 +42,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         // 전체화면 설정
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -51,6 +53,7 @@ public class SplashActivity extends AppCompatActivity {
         email = sharedPreferences.getString("email", "");
         password = sharedPreferences.getString("password", "");
 
+        // 자동 로그인 처리
         if (!email.contentEquals("") && !password.contentEquals("")) {
             loginEvent();
         } else {
@@ -61,6 +64,7 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    // loginEvent : email, password 확인 후 배달원, 고객으로 나눠서 자동 로그인
     private void loginEvent() {
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -93,6 +97,7 @@ public class SplashActivity extends AppCompatActivity {
                 });
     }
 
+    // chooseActivity : 배달원, 고객 나눠서 MainActivity 실행
     private void chooseActivity(int loginIdentifier) {
         switch (loginIdentifier) {
             case 1:

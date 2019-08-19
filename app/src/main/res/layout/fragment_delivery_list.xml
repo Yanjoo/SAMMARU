@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="배송 조회 프래그먼트" />
+        android:text="배송 목록 프래그먼트 기사 정보 보여줌?" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fragment_delivery_list_fab"

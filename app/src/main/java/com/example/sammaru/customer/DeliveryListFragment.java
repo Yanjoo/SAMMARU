@@ -33,11 +33,12 @@ import com.google.firebase.database.FirebaseDatabase;
  * 고객이 최근에 주문한 상품이 위쪽으로 오도록 정렬해야 한다.
  * 상품 클릭 시 배송하는 기사님과 대화방으로 연결이 되야한다.
  */
+
 public class DeliveryListFragment extends Fragment {
 
-    private FloatingActionButton fab;
-    private String deliveryCompany = null;
-    private String baseUrl = "https://tracker.delivery/#/";
+    private FloatingActionButton fab;           // 플로팅 버튼
+    private String deliveryCompany = null;      // 택배 회사 이름
+    private String baseUrl = "https://tracker.delivery/#/";     // 배송 조회 기본 URL
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +54,10 @@ public class DeliveryListFragment extends Fragment {
         return rootView;
     }
 
+    // dialogShow : 플로팅 버튼 클릭 시 송장번호 등록 다이얼로그 생성
+    /**
+    * 상품명 직접 입력 받게 수정
+    */
     private void dialogShow() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
@@ -108,7 +113,7 @@ public class DeliveryListFragment extends Fragment {
             public void onClick(View view) {
                 // 서버에 저장할 데이터
                 ProductModel productModel = new ProductModel();
-                productModel.setUid(baseUrl + deliveryCompany + number.getText().toString());
+                productModel.setUrl(baseUrl + deliveryCompany + number.getText().toString());
 
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 productModel.setUid(uid);

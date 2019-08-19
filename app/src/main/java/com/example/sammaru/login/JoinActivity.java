@@ -8,9 +8,13 @@ import android.widget.ImageView;
 
 import com.example.sammaru.R;
 
-// test
-// DooHee
-// Hanju
+/**
+ * 회원가입 액티비티
+ *
+ * 기능 : CourierJoinFragment, CustomerJoinFragment 관리
+ */
+
+
 public class JoinActivity extends AppCompatActivity {
 
     CourierJoinFragment courierJoinFragment;
@@ -18,7 +22,6 @@ public class JoinActivity extends AppCompatActivity {
 
     ImageView courierImageView;
     ImageView customerImageView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class JoinActivity extends AppCompatActivity {
 
         courierJoinFragment = new CourierJoinFragment();
         customerJoinFragment = new CustomerJoinFragment();
-        onFragmentChanged(0);
+        onFragmentChanged(0); // 기본 선택은 배달원
     }
 
     public void onFragmentChanged(int index) {
