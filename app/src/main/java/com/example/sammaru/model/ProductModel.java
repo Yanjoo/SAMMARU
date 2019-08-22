@@ -10,6 +10,7 @@ public class ProductModel {
     private String owner;        // 고객
     private String address;      // 고객 주소
     private String uid;          // 고객 uid 채팅에서 사용
+    private String number;       // 송장번호
 
     public String getProductName() {
         return productName;
@@ -33,6 +34,14 @@ public class ProductModel {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getAddress() {

@@ -10,17 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.service.autofill.Dataset;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.sammaru.R;
 import com.example.sammaru.model.ProductModel;
@@ -72,15 +65,14 @@ public class LookUpFragment extends Fragment {
                     productModels.clear();
 
                     for (DataSnapshot company : dataSnapshot.getChildren()) {
-                        for (DataSnapshot id : company.getChildren()) {
-                            for (DataSnapshot item : id.getChildren()) {
-                                ProductModel productModel = item.getValue(ProductModel.class);
-                                if (productModel.getUid().equals(myUid)) {
-                                    productModels.add(productModel);
-                                }
+                        for (DataSnapshot item : company.getChildren()) {
+                            ProductModel productModel = item.getValue(ProductModel.class);
+                            if (productModel.getUid().equals(myUid)) {
+                                productModels.add(productModel);
                             }
-                            notifyDataSetChanged();
                         }
+                        notifyDataSetChanged();
+
                     }
                 }
 
@@ -94,12 +86,13 @@ public class LookUpFragment extends Fragment {
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_customer, parent, false);
             return new CustomeViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -109,6 +102,8 @@ public class LookUpFragment extends Fragment {
                     startActivity(goDelivery);
                 }
             });
+
+            ((CustomeViewHolder)holder).itemName.setText(productModels.get(position).getProductName());
         }
 
         @Override
@@ -117,9 +112,11 @@ public class LookUpFragment extends Fragment {
         }
 
         private class CustomeViewHolder extends RecyclerView.ViewHolder {
+            public TextView itemName;
 
             public CustomeViewHolder(@NonNull View itemView) {
                 super(itemView);
+                itemName = itemView.findViewById(R.id.item_product_name);
             }
         }
     }

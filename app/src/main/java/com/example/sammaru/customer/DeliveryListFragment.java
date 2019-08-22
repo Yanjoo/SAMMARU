@@ -104,7 +104,10 @@ public class DeliveryListFragment extends Fragment {
         });
 
         // 송장번호
-        final EditText number = view.findViewById(R.id.dialog_lookup_add_editText);
+        final EditText number = view.findViewById(R.id.dialog_lookup_add_editText_number);
+
+        // 아이템 명
+        final EditText item = view.findViewById(R.id.dialog_lookup_add_editText_item);
 
         final AlertDialog dialog = builder.create();
         dialog.setTitle("택배 추가");
@@ -115,17 +118,28 @@ public class DeliveryListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // 서버에 저장할 데이터
+
+                // url 설정
                 ProductModel productModel = new ProductModel();
                 productModel.setUrl(baseUrl + deliveryCompany + number.getText().toString());
 
+                // 송장번호 설정
+                productModel.setNumber(number.getText().toString());
+
+                // uid 설정
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 productModel.setUid(uid);
 
+                // 상품 이름 설정
+                String name = item.getText().toString();
+                productModel.setProductName(name);
+
+                // 택배 회사 설정
                 int startIndex = deliveryCompany.indexOf('.') + 1;
                 int endIndex = deliveryCompany.indexOf('/');
                 String companyName = deliveryCompany.substring(startIndex, endIndex);
 
-                FirebaseDatabase.getInstance().getReference().child("products").child(companyName).child(uid).push().setValue(productModel)
+                FirebaseDatabase.getInstance().getReference().child("products").child(companyName).push().setValue(productModel)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

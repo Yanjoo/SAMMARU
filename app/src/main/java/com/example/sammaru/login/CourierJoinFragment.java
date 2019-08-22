@@ -71,9 +71,8 @@ public class CourierJoinFragment extends Fragment {
             public void onClick(View view) {
                 // 회원가입 양식을 빼먹었을 경우 회원가입 안됨, 실패시 안된 이유 추가
                 if (email.getText().toString().contentEquals("") || password.getText().toString().contentEquals("")
-                        || name.getText().toString().contentEquals("") || phone.getText().toString().contentEquals("")) {
+                        || name.getText().toString().contentEquals("") || phone.getText().toString().contentEquals("") || choiceCompany.getText().toString().contentEquals("")) {
                     Toast.makeText(getActivity(), "양식을 다 채워주세요", Toast.LENGTH_SHORT).show();
-
                     return;
                 }
 
