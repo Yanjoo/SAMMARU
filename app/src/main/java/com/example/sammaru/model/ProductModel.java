@@ -9,7 +9,7 @@ public class ProductModel {
     private String url;          // 배송조회 url
     private String owner;        // 고객
     private String address;      // 고객 주소
-    private String userUid;      // 고객 uid
+    private String customerUid;      // 고객 uid
     private String courierUid;   // 배달원 uid
     private String number;       // 송장번호
 
@@ -53,12 +53,12 @@ public class ProductModel {
         this.address = address;
     }
 
-    public String getUserUid() {
-        return userUid;
+    public String getCustomerUid() {
+        return customerUid;
     }
 
-    public void setUserUid(String userUid) {
-        this.userUid = userUid;
+    public void setCustomerUid(String customerUid) {
+        this.customerUid = customerUid;
     }
 
     public String getCourierUid() {

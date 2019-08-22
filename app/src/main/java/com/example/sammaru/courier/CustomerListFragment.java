@@ -42,7 +42,6 @@ public class CustomerListFragment extends Fragment {
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        // 리사이클러뷰로 회사에 맞는 아이템을 리스트로 보여줌
         RecyclerView recyclerView = rootView.findViewById(R.id.fragment_customer_list_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
         recyclerView.setAdapter(new CustomerListFragmentAdapter());

@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sammaru.R;
@@ -22,7 +25,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,14 +44,18 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class DeliveryListFragment extends Fragment {
 
-    private FloatingActionButton fab;           // 플로팅 버튼
-    private String deliveryCompany = null;      // 택배 회사 이름
-    private String baseUrl = "https://tracker.delivery/#/";     // 배송 조회 기본 URL
+    private FloatingActionButton fab;                       // 플로팅 버튼
+    private String deliveryCompany = null;                  // 택배 회사 이름
+    private String baseUrl = "https://tracker.delivery/#/"; // 배송 조회 기본 URL
+
+    private String uid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_delivery_list, container, false);
+
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         // 플로팅 버튼 클릭 이벤트
         fab = rootView.findViewById(R.id.fragment_delivery_list_fab);
@@ -52,10 +65,15 @@ public class DeliveryListFragment extends Fragment {
                 dialogShow();
             }
         });
+
+        RecyclerView recyclerView = rootView.findViewById(R.id.fragment_delivery_list_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+        recyclerView.setAdapter(new DeliveryListFragmentAdapter());
+
         return rootView;
     }
 
-    // dialogShow : 플로팅 버튼 클릭 시 dialog_look_up_add 다이얼로그 생성
+    // dialogShow : 플로팅 버튼 클릭시 dialog_look_up_add 다이얼로그 생성
     private void dialogShow() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
@@ -125,8 +143,7 @@ public class DeliveryListFragment extends Fragment {
                 productModel.setNumber(number.getText().toString());
 
                 // uid 설정
-                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                productModel.setUserUid(uid);
+                productModel.setCustomerUid(uid);
 
                 // 상품 이름 설정
                 String name = item.getText().toString();
@@ -161,4 +178,76 @@ public class DeliveryListFragment extends Fragment {
         dialog.show();
     }
 
+    private class DeliveryListFragmentAdapter extends RecyclerView.Adapter {
+
+        List<ProductModel> products;
+
+        DeliveryListFragmentAdapter() {
+            products = new ArrayList<>();
+
+            FirebaseDatabase.getInstance().getReference().child("register").child("products").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    products.clear();
+                    for (DataSnapshot item : dataSnapshot.getChildren()) {
+                        ProductModel productModel = item.getValue(ProductModel.class);
+                        if (productModel.getCustomerUid().equals(uid)) {
+                            products.add(productModel);
+                        }
+                    }
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.item_delivery_info, parent, false);
+            return new CustomViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getActivity(), "채팅방 연결", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            ((CustomViewHolder)holder).productName.setText("상품명");
+            ((CustomViewHolder)holder).number.setText("송장번호");
+            ((CustomViewHolder)holder).btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getActivity(), "파이어베이스에서 삭제 해야됨", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return products.size();
+        }
+
+        private class CustomViewHolder extends RecyclerView.ViewHolder {
+            TextView productName;
+            TextView number;
+            Button btnDelete;
+
+            public CustomViewHolder(@NonNull View itemView) {
+                super(itemView);
+
+                productName = itemView.findViewById(R.id.item_delivery_info_name);
+                number = itemView.findViewById(R.id.item_delivery_info_number);
+                btnDelete = itemView.findViewById(R.id.item_delivery_info_btn);
+            }
+        }
+    }
 }

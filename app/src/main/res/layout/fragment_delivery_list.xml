@@ -6,10 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".customer.DeliveryListFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="배송 목록 프래그먼트 기사 정보 보여줌?" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_delivery_list_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fragment_delivery_list_fab"
