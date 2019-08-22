@@ -67,7 +67,7 @@ public class LookUpFragment extends Fragment {
                     for (DataSnapshot company : dataSnapshot.getChildren()) {
                         for (DataSnapshot item : company.getChildren()) {
                             ProductModel productModel = item.getValue(ProductModel.class);
-                            if (productModel.getUid().equals(myUid)) {
+                            if (productModel.getUserUid().equals(myUid)) {
                                 productModels.add(productModel);
                             }
                         }

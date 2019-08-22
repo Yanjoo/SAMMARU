@@ -10,7 +10,7 @@
         android:gravity="center_vertical">
 
         <TextView
-            android:id="@+id/item_all_product_courier_address"
+            android:id="@+id/item_customer_info_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -19,21 +19,20 @@
             android:text="주소"/>
 
         <TextView
-            android:id="@+id/item_all_product_courier_number"
+            android:id="@+id/item_customer_info_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_toRightOf="@id/item_all_product_courier_address"
-            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/item_customer_info_address"
             android:textSize="16dp"
             android:text="송장번호"/>
 
-        <Button
-            android:id="@+id/item_all_product_courier_button_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="등록"/>
+        <ImageView
+            android:id="@+id/item_customer_info_bell"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bell"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <LinearLayout

@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".courier.CustomerListFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_customer_list_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="고객 리스트 프래그먼트" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

@@ -14,15 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sammaru.R;
 import com.example.sammaru.model.ProductModel;
 import com.example.sammaru.model.UserModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -105,18 +105,25 @@ public class ProductListFragment extends Fragment {
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(getContext()).inflate(R.layout.item_all_product_courier, parent, false);
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.item_product_courier, parent, false);
             return new CustomViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
             ((CustomViewHolder)holder).address.setText("고객 주소");
             ((CustomViewHolder)holder).number.setText(products.get(position).getNumber());
             ((CustomViewHolder)holder).addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getActivity(), "인연이라고 하죠", Toast.LENGTH_SHORT).show();
+                    ProductModel product = products.get(position);
+                    product.setCourierUid(uid);
+                    FirebaseDatabase.getInstance().getReference().child("register").child("products").push().setValue(product).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
                 }
             });
         }
@@ -134,9 +141,9 @@ public class ProductListFragment extends Fragment {
             public CustomViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                address = itemView.findViewById(R.id.item_all_product_courier_address);
-                number = itemView.findViewById(R.id.item_all_product_courier_number);
-                addBtn = itemView.findViewById(R.id.item_all_product_courier_button_add);
+                address = itemView.findViewById(R.id.item_product_courier_address);
+                number = itemView.findViewById(R.id.item_product_courier_number);
+                addBtn = itemView.findViewById(R.id.item_product_courier_button_add);
             }
         }
 

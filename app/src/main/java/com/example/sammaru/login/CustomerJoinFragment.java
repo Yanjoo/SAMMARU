@@ -35,6 +35,7 @@ public class CustomerJoinFragment extends Fragment {
     private EditText phone;
     private Button submit;
     private Button cancel;
+    private EditText address;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +48,7 @@ public class CustomerJoinFragment extends Fragment {
         phone = rootView.findViewById(R.id.fragment_customer_join_phone);
         submit = rootView.findViewById(R.id.fragment_customer_join_submit);
         cancel = rootView.findViewById(R.id.fragment_customer_join_cancel);
+        address = rootView.findViewById(R.id.fragment_customer_join_address);
 
         // 회원가입 버튼 클릭 이벤트
         submit.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +74,7 @@ public class CustomerJoinFragment extends Fragment {
                                 userModel.setUid(uid);
                                 userModel.setName(name.getText().toString());
                                 userModel.setPhone(phone.getText().toString());
+                                userModel.setAddress(address.getText().toString());
                                 userModel.setIdentifier(1); // 고객일 경우 구분자 1
 
                                 // DB에 고객 데이터 저장
@@ -83,7 +86,6 @@ public class CustomerJoinFragment extends Fragment {
                                                 getActivity().finish(); // 액티비티 종료
                                             }
                                         });
-
                             }
                         });
             }
