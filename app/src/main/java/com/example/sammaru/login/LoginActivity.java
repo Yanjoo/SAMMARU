@@ -17,10 +17,18 @@ import com.example.sammaru.R;
 import com.example.sammaru.courier.CourierMainActivity;
 import com.example.sammaru.customer.CustomerMainActivity;
 import com.example.sammaru.model.UserModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +48,16 @@ public class LoginActivity extends AppCompatActivity {
     private int loginIdentifier;    // 로그인 구분자 1:고객, 2:배달원
 
     private SharedPreferences sharedPreferences;    // 이메일 기억에 사용
+    // 구글로그인 result 상수
+    private static final int RC_SIGN_IN = 900;
+
+    // 구글api클라이언트
+    private GoogleSignInClient googleSignInClient;
+
+
+    // 구글  로그인 버튼
+    private SignInButton buttonGoogle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         // 회원가입 버튼 클릭 이벤트
-        Button join = findViewById(R.id.login_activity_button_join);
+        Button join = findViewById(R.id.activity_login_button_join);
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,11 +84,36 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // 로그인 버튼 클릭 이벤트
-        Button login = findViewById(R.id.login_activity_button_login);
+        Button login = findViewById(R.id.activity_login_button_login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginEvent();
+            }
+        });
+
+
+
+
+        // 파이어베이스 인증 객체 선언
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        buttonGoogle = findViewById(R.id.activity_login_button_googleSignIn);
+
+        // Google 로그인을 앱에 통합
+        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
+        buttonGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signInIntent = googleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
     }
@@ -90,11 +133,16 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             final String uid = task.getResult().getUser().getUid();
+
+                            Log.d("LoginActivity ", uid);
                             databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                                         UserModel userModel = item.getValue(UserModel.class);
+                                        Log.d("LoginActivity ", userModel.toString());
+                                        Log.d("LoginActivity ", userModel.getUid());
+                                        Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                                         if (userModel.getUid().equals(uid)) {
                                             loginIdentifier = userModel.getIdentifier(); // 구분자 1: 고객, 2: 배달원
                                             chooseActivity(loginIdentifier);    // 구분자에 따른 메인 액티비티 선택
@@ -170,5 +218,42 @@ public class LoginActivity extends AppCompatActivity {
             editor.commit();
         }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // 구글로그인 버튼 응답
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // 구글 로그인 성공
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+
+            } catch (ApiException e) {
+
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // 로그인 성공
+                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // 로그인 실패
+                            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
     }
 }

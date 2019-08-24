@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "345916949067",
+    "firebase_url": "https://sammaru-15926.firebaseio.com",
+    "project_id": "sammaru-15926",
+    "storage_bucket": "sammaru-15926.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345916949067:android:8378ac3ccb583f1f",
+        "android_client_info": {
+          "package_name": "com.example.sammaru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345916949067-hlop2nhfuf5ui566mk2761kgo7bnp07f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sammaru",
+            "certificate_hash": "bc4ed911109fb802d5090020cf123ec3df2a2963"
+          }
+        },
+        {
+          "client_id": "345916949067-3hdd2444hmm8ju1ubptfdv78qttv6p0b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvL7yvLokX85jtqtz_UTFCFH1kK3ShSuM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345916949067-3hdd2444hmm8ju1ubptfdv78qttv6p0b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
