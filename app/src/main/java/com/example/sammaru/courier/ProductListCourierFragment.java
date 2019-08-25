@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProductListFragment extends Fragment {
+public class ProductListCourierFragment extends Fragment {
 
     private String companyName;
     private String uid;
@@ -51,7 +51,7 @@ public class ProductListFragment extends Fragment {
                     UserModel userModel = users.getValue(UserModel.class);
                     if (userModel.getUid().equals(uid)) {
                         companyName = userModel.getCompany();
-                        Log.d("ProductListFragment", companyName);
+                        Log.d("ProductListCourierFragment", companyName);
                     }
                 }
             }
@@ -82,12 +82,12 @@ public class ProductListFragment extends Fragment {
                     products.clear();
 
                     for (DataSnapshot company : dataSnapshot.getChildren()) {
-                        Log.d("ProductListFragment ", company.getKey());
+                        Log.d("ProductListCourierFragment ", company.getKey());
                         if (company.getKey().equals(companyName)) {
                             for (DataSnapshot item : company.getChildren()) {
                                 ProductModel productModel = item.getValue(ProductModel.class);
                                 products.add(productModel);
-                                Log.d("ProductListFragment", " item add");
+                                Log.d("ProductListCourierFragment", " item add");
                             }
                             notifyDataSetChanged();
                         }

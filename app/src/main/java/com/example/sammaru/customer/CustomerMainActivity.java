@@ -5,18 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.sammaru.R;
 import com.example.sammaru.SettingFragment;
-import com.example.sammaru.model.UserModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 /**
  * 고객 메인 액티비티
@@ -40,7 +33,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
 
-        deliveryListFragment = new DeliveryListFragment();
+        deliveryListFragment = new ProductListCustomerFragment();
         lookUpFragment = new LookUpFragment();
         settingFragment = new SettingFragment();
 

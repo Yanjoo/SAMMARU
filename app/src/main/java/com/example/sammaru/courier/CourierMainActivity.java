@@ -31,7 +31,7 @@ public class CourierMainActivity extends AppCompatActivity {
 
         customerListFragment = new CustomerListFragment();
         settingFragment = new SettingFragment();
-        productListFragment = new ProductListFragment();
+        productListFragment = new ProductListCourierFragment();
 
         // 네비게이션 뷰 클릭 이벤트
         BottomNavigationView navView = findViewById(R.id.courier_main_activity_navigation);

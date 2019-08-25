@@ -1,6 +1,7 @@
 package com.example.sammaru.customer;
 
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ import java.util.List;
  * 상품 클릭 시 배송하는 기사님과 대화방으로 연결이 되야한다.
  */
 
-public class DeliveryListFragment extends Fragment {
+public class ProductListCustomerFragment extends Fragment {
 
     private FloatingActionButton fab;                       // 플로팅 버튼
     private String deliveryCompany = null;                  // 택배 회사 이름
@@ -215,13 +216,14 @@ public class DeliveryListFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), MessageActivity.class);
-
-                    startActivity(intent);
+                    intent.putExtra("destinationUid", products.get(position).getCourierUid());
+                    ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.fromright, R.anim.toleft);
+                    startActivity(intent, activityOptions.toBundle());
                 }
             });
 
