@@ -15,7 +15,6 @@
             android:layout_height="match_parent">
 
             <ImageView
-
                 android:id="@+id/activity_message_back"
                 android:layout_alignParentLeft="true"
                 android:layout_width="30dp"

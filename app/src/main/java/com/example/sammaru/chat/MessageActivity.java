@@ -52,7 +52,6 @@ public class MessageActivity extends AppCompatActivity {
     private ImageView phone;
 
     private RecyclerView recyclerView;
-    private DatabaseReference mDatabase;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("a hh:mm");
 
@@ -73,10 +72,13 @@ public class MessageActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.activity_message_recyclerview);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        Log.d("MessageActivity", "uid: " + myUid);
-        Log.d("MessageActivity", "destination: " + destinationUid);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +88,7 @@ public class MessageActivity extends AppCompatActivity {
                 chatModel.users.put(destinationUid, true);
 
                 if (chatRoomUid == null) {
-                    mDatabase.child("chatrooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             checkChatRoom();
@@ -108,7 +110,7 @@ public class MessageActivity extends AppCompatActivity {
 
     // checkChatRoom : DB에 있는 채팅 목록 불러오기
     private void checkChatRoom() {
-        mDatabase.child("chatrooms").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/"+myUid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
@@ -151,7 +153,7 @@ public class MessageActivity extends AppCompatActivity {
         }
 
         private void getMessageList() {
-            mDatabase.child("chatrooms").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
+            FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     comments.clear();
@@ -159,7 +161,7 @@ public class MessageActivity extends AppCompatActivity {
                         ChatModel.Comment comment = item.getValue(ChatModel.Comment.class);
                         comments.add(comment);
                     }
-                    notifyDataSetChanged();
+                    notifyDataSetChanged(); // 메시지 갱신
 
                     recyclerView.scrollToPosition(comments.size() - 1);
                 }
