@@ -4,7 +4,9 @@ import android.os.Bundle;
 
 import com.example.sammaru.model.ChatModel;
 import com.example.sammaru.model.UserModel;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -23,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sammaru.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +33,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -72,6 +76,19 @@ public class MessageActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.activity_message_recyclerview);
 
+        macro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MessageActivity.this, "매크로 기능 구현", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MessageActivity.this, "전화 기능 구현", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,11 +115,15 @@ public class MessageActivity extends AppCompatActivity {
                     ChatModel.Comment comment = new ChatModel.Comment();
                     comment.uid = myUid;
                     comment.message = editText.getText().toString();
+                    comment.timestamp = ServerValue.TIMESTAMP;
                     FirebaseDatabase.getInstance().getReference().child("chatrooms")
-                            .child(chatRoomUid).child("comments").push().setValue(comment);
+                            .child(chatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            editText.setText("");
+                        }
+                    });
                 }
-
-
             }
         });
         checkChatRoom();
@@ -199,11 +220,11 @@ public class MessageActivity extends AppCompatActivity {
                 messageViewHolder.main.setGravity(Gravity.LEFT);
             }
 
-            /*long unixTime = (long) comments.get(position).timestamp;
+            long unixTime = (long) comments.get(position).timestamp;
             Date date = new Date(unixTime);
             simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
             String time = simpleDateFormat.format(date);
-            messageViewHolder.timestamp.setText(time);*/
+            messageViewHolder.timestamp.setText(time);
 
         }
 
