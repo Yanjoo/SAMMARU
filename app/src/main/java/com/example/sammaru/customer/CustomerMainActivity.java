@@ -22,9 +22,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 //
 public class CustomerMainActivity extends AppCompatActivity {
 
-    Fragment deliveryListFragment;
-    Fragment lookUpFragment;
-    Fragment settingFragment;
+    private Fragment deliveryListFragment;
+    private Fragment lookUpFragment;
+    private Fragment settingFragment;
 
     private String company;
 

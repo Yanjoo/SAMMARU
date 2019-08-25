@@ -222,6 +222,7 @@ public class ProductListCustomerFragment extends Fragment {
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), MessageActivity.class);
                     intent.putExtra("destinationUid", products.get(position).getCourierUid());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.fromright, R.anim.toleft);
                     startActivity(intent, activityOptions.toBundle());
                 }

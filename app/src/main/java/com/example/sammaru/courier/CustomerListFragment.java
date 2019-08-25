@@ -93,6 +93,7 @@ public class CustomerListFragment extends Fragment {
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), MessageActivity.class);
                     intent.putExtra("destinationUid", products.get(position).getCustomerUid());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.fromright, R.anim.toleft);
                     startActivity(intent, activityOptions.toBundle());
 
@@ -116,9 +117,9 @@ public class CustomerListFragment extends Fragment {
 
         private class CustomViewHolder extends RecyclerView.ViewHolder {
 
-            private TextView address;
-            private TextView number;
-            private ImageView bell;
+            public TextView address;
+            public TextView number;
+            public ImageView bell;
 
             public CustomViewHolder(@NonNull View itemView) {
                 super(itemView);

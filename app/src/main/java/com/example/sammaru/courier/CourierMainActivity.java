@@ -20,9 +20,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CourierMainActivity extends AppCompatActivity {
 
-    Fragment customerListFragment;
-    Fragment settingFragment;
-    Fragment productListFragment;
+    private Fragment customerListFragment;
+    private Fragment settingFragment;
+    private Fragment productListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

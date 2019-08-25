@@ -79,7 +79,9 @@ public class LoginActivity extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, JoinActivity.class));
+                Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
 
@@ -166,16 +168,22 @@ public class LoginActivity extends AppCompatActivity {
 
     // chooseActivity : MainActivity 선택
     private void chooseActivity(int loginIdentifier) {
+        Intent intent;
+
         switch (loginIdentifier) {
             case 1:
                 // CustomerMainActivity 실행
-                startActivity(new Intent(LoginActivity.this, CustomerMainActivity.class));
+                intent = new Intent(LoginActivity.this, CustomerMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
                 finish();
                 break;
 
             case 2:
                 // CourierMainActivity 실행
-                startActivity(new Intent(LoginActivity.this, CourierMainActivity.class));
+                intent = new Intent(LoginActivity.this, CourierMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
                 finish();
                 break;
 

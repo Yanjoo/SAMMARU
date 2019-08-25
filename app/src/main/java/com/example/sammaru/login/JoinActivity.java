@@ -17,11 +17,11 @@ import com.example.sammaru.R;
 
 public class JoinActivity extends AppCompatActivity {
 
-    CourierJoinFragment courierJoinFragment;
-    CustomerJoinFragment customerJoinFragment;
+    private CourierJoinFragment courierJoinFragment;
+    private CustomerJoinFragment customerJoinFragment;
 
-    ImageView courierImageView;
-    ImageView customerImageView;
+    private ImageView courierImageView;
+    private ImageView customerImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
