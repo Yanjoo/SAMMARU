@@ -2,6 +2,7 @@ package com.example.sammaru.customer;
 
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sammaru.R;
+import com.example.sammaru.chat.MessageActivity;
 import com.example.sammaru.model.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -53,7 +55,7 @@ public class DeliveryListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_delivery_list, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_product_list_customer, container, false);
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -217,7 +219,9 @@ public class DeliveryListFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getActivity(), "채팅방 연결", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(view.getContext(), MessageActivity.class);
+
+                    startActivity(intent);
                 }
             });
 

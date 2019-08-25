@@ -1,5 +1,6 @@
 package com.example.sammaru.courier;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sammaru.R;
+import com.example.sammaru.chat.MessageActivity;
 import com.example.sammaru.model.ProductModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -88,7 +90,10 @@ public class CustomerListFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getActivity(), "채팅방 연결 필요", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(view.getContext(), MessageActivity.class);
+
+                    startActivity(intent);
+
                 }
             });
 

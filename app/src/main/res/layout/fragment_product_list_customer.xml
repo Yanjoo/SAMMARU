@@ -17,8 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:src="@drawable/upload"
-        app:backgroundTint="#FF9800"
+        android:src="@drawable/upload_product"
+        app:backgroundTint="#D81B60"
         app:fabSize="normal"
         app:rippleColor="#FFFFFF" />
 
