@@ -10,6 +10,12 @@ import android.view.MenuItem;
 import com.example.sammaru.R;
 import com.example.sammaru.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 기사 메인 액티비티
@@ -54,6 +60,8 @@ public class CourierMainActivity extends AppCompatActivity {
             }
         });
         getSupportFragmentManager().beginTransaction().add(R.id.courier_main_activity_framelayout, new CustomerListFragment()).commit();
+
+        passPushTokenToServer();
     }
 
     // loadFragment : 네비게이션 뷰 클릭시 해당하는 프래그먼트 로딩
@@ -63,5 +71,15 @@ public class CourierMainActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    void passPushTokenToServer() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String token = FirebaseInstanceId.getInstance().getToken();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("pushToken", token);
+
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid).updateChildren(map);
     }
 }

@@ -10,6 +10,12 @@ import android.view.MenuItem;
 import com.example.sammaru.R;
 import com.example.sammaru.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 고객 메인 액티비티
@@ -25,8 +31,6 @@ public class CustomerMainActivity extends AppCompatActivity {
     private Fragment deliveryListFragment;
     private Fragment lookUpFragment;
     private Fragment settingFragment;
-
-    private String company;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,8 @@ public class CustomerMainActivity extends AppCompatActivity {
             }
         });
         getSupportFragmentManager().beginTransaction().add(R.id.customer_main_activity_framelayout, deliveryListFragment).commit();
+
+        passPushTokenToServer();
     }
 
     // loadFragment : 네비게이션 뷰 클릭 시 해당하는 프래그먼트를 불러옴
@@ -69,6 +75,14 @@ public class CustomerMainActivity extends AppCompatActivity {
         return false;
     }
 
-    public String getCompany() {return company;}
+    void passPushTokenToServer() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String token = FirebaseInstanceId.getInstance().getToken();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("pushToken", token);
+
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid).updateChildren(map);
+    }
 
 }

@@ -3,6 +3,7 @@ package com.example.sammaru.chat;
 import android.os.Bundle;
 
 import com.example.sammaru.model.ChatModel;
+import com.example.sammaru.model.NotificationModel;
 import com.example.sammaru.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,6 +22,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.textclassifier.TextLinks;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,12 +37,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MessageActivity extends AppCompatActivity {
 
@@ -58,6 +70,8 @@ public class MessageActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("a hh:mm");
+
+    private UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +134,7 @@ public class MessageActivity extends AppCompatActivity {
                             .child(chatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                            sendFcm();
                             editText.setText("");
                         }
                     });
@@ -151,11 +166,43 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
+    private void sendFcm() {
+        Gson gson = new Gson();
+
+        NotificationModel notificationModel = new NotificationModel();
+        notificationModel.to = userModel.pushToken;
+        notificationModel.notification.title = "보내는 아이디";
+        notificationModel.notification.text = editText.getText().toString();
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf8"), gson.toJson(notificationModel));
+
+        Request request = new Request.Builder()
+                .header("Content-Type", "application/json")
+                .addHeader("Authorization", "key=AAAAUIpBwks:APA91bFyB0l4lo8_3fxZA-srAudzr3g6Kgyj2cQbJsIQgs9xIx2PfCoGi3kxK1Hv321a5F2heFURks8zJZkCVEBa3sAXi3XmtG-9KkZJOoBzJ_ptanLE35J9sAz4pO5OpwzGTdrflNNj")
+                .url("https://fcm.googleapis.com/fcm/send")
+                .post(requestBody)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+            }
+        });
+
+    }
+
+
     private class MessageListAdpater extends RecyclerView.Adapter {
         
         List<ChatModel.Comment> comments;
-        UserModel userModel;
-        
+
         public MessageListAdpater() {
             comments = new ArrayList<>();
             
@@ -204,7 +251,7 @@ public class MessageActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            MessageViewHolder messageViewHolder = ((MessageViewHolder) holder);
+            MessageViewHolder messageViewHolder = (MessageViewHolder) holder;
 
             // 내가 보낸 메시지
             if (comments.get(position).uid.equals(myUid)) {
@@ -213,6 +260,11 @@ public class MessageActivity extends AppCompatActivity {
                 messageViewHolder.destination.setVisibility(View.INVISIBLE);
                 messageViewHolder.main.setGravity(Gravity.RIGHT);
             } else { // 상대방이 보낸 메시지
+                if (userModel.getIdentifier() == 1) {
+                    messageViewHolder.imageView.setImageResource(R.drawable.user);
+                } else {
+                    messageViewHolder.imageView.setImageResource(R.drawable.courier);
+                }
                 messageViewHolder.name.setText(userModel.getName());
                 messageViewHolder.destination.setVisibility(View.VISIBLE);
                 messageViewHolder.message.setBackgroundResource(R.drawable.leftbubble);

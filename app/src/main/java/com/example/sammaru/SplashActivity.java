@@ -100,16 +100,21 @@ public class SplashActivity extends AppCompatActivity {
 
     // chooseActivity : 배달원, 고객 나눠서 MainActivity 실행
     private void chooseActivity(int loginIdentifier) {
+        Intent intent;
         switch (loginIdentifier) {
             case 1:
                 // CustomerMainActivity 실행
-                startActivity(new Intent(this, CustomerMainActivity.class));
+                intent = new Intent(this, CustomerMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
                 finish();
                 break;
 
             case 2:
                 // CourierMainActivity 실행
-                startActivity(new Intent(this, CourierMainActivity.class));
+                intent = new Intent(this, CourierMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
                 finish();
                 break;
 

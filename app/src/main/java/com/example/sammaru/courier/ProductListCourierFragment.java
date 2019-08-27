@@ -29,9 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ProductListCourierFragment extends Fragment {
 
     private String companyName;
@@ -51,7 +48,6 @@ public class ProductListCourierFragment extends Fragment {
                     UserModel userModel = users.getValue(UserModel.class);
                     if (userModel.getUid().equals(uid)) {
                         companyName = userModel.getCompany();
-                        Log.d("ProductListCourierFragment", companyName);
                     }
                 }
             }
@@ -82,12 +78,10 @@ public class ProductListCourierFragment extends Fragment {
                     products.clear();
 
                     for (DataSnapshot company : dataSnapshot.getChildren()) {
-                        Log.d("ProductListCourierFragment ", company.getKey());
                         if (company.getKey().equals(companyName)) {
                             for (DataSnapshot item : company.getChildren()) {
                                 ProductModel productModel = item.getValue(ProductModel.class);
                                 products.add(productModel);
-                                Log.d("ProductListCourierFragment", " item add");
                             }
                             notifyDataSetChanged();
                         }

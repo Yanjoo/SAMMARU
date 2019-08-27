@@ -12,6 +12,7 @@ public class UserModel {
     private String address; // 사용자 주소 (배달원 null)
     private String company; // 사용자 회사 (고객 null)
     private int identifier; // 1이면 고객 2이면 배달원
+    public String pushToken;
 
     public String getAddress() {
         return address;
