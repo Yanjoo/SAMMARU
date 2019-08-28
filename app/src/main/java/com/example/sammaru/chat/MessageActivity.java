@@ -8,21 +8,16 @@ import com.example.sammaru.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.textclassifier.TextLinks;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,7 +28,6 @@ import com.example.sammaru.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
@@ -71,7 +65,7 @@ public class MessageActivity extends AppCompatActivity {
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("a hh:mm");
 
-    private UserModel userModel;
+    private UserModel destinationUserModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,10 +163,16 @@ public class MessageActivity extends AppCompatActivity {
     private void sendFcm() {
         Gson gson = new Gson();
 
+        String userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
         NotificationModel notificationModel = new NotificationModel();
-        notificationModel.to = userModel.pushToken;
-        notificationModel.notification.title = "보내는 아이디";
+        notificationModel.to = destinationUserModel.pushToken;
+        notificationModel.notification.title = userName;
         notificationModel.notification.text = editText.getText().toString();
+        notificationModel.data.title = userName;
+        notificationModel.data.text = editText.getText().toString();
+        notificationModel.data.id = String.valueOf(destinationUserModel.getIdentifier());
+
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf8"), gson.toJson(notificationModel));
 
@@ -209,7 +209,7 @@ public class MessageActivity extends AppCompatActivity {
             FirebaseDatabase.getInstance().getReference().child("users").child(destinationUid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    userModel = dataSnapshot.getValue(UserModel.class);
+                    destinationUserModel = dataSnapshot.getValue(UserModel.class);
                     getMessageList();
                 }
 
@@ -260,12 +260,12 @@ public class MessageActivity extends AppCompatActivity {
                 messageViewHolder.destination.setVisibility(View.INVISIBLE);
                 messageViewHolder.main.setGravity(Gravity.RIGHT);
             } else { // 상대방이 보낸 메시지
-                if (userModel.getIdentifier() == 1) {
+                if (destinationUserModel.getIdentifier() == 1) {
                     messageViewHolder.imageView.setImageResource(R.drawable.user);
                 } else {
                     messageViewHolder.imageView.setImageResource(R.drawable.courier);
                 }
-                messageViewHolder.name.setText(userModel.getName());
+                messageViewHolder.name.setText(destinationUserModel.getName());
                 messageViewHolder.destination.setVisibility(View.VISIBLE);
                 messageViewHolder.message.setBackgroundResource(R.drawable.leftbubble);
                 messageViewHolder.message.setText(comments.get(position).message);
