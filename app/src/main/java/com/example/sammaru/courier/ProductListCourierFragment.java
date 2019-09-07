@@ -105,7 +105,7 @@ public class ProductListCourierFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-            ((CustomViewHolder)holder).address.setText("고객 주소");
+            ((CustomViewHolder)holder).address.setText(products.get(position).getAddress());
             ((CustomViewHolder)holder).number.setText(products.get(position).getNumber());
             ((CustomViewHolder)holder).addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

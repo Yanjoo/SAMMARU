@@ -100,7 +100,7 @@ public class CustomerListFragment extends Fragment {
                 }
             });
 
-            ((CustomViewHolder)holder).address.setText("고객 주소");
+            ((CustomViewHolder)holder).address.setText(products.get(position).getAddress());
             ((CustomViewHolder)holder).number.setText("송장 번호 : " + products.get(position).getNumber());
             ((CustomViewHolder)holder).bell.setOnClickListener(new View.OnClickListener() {
                 @Override

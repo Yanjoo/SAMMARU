@@ -108,7 +108,6 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-
         ChatModel chatModel = new ChatModel();
         chatModel.users.put(myUid, true);
         chatModel.users.put(destinationUid, true);
@@ -144,7 +143,8 @@ public class MessageActivity extends AppCompatActivity {
 
     // checkChatRoom : DB에 있는 채팅 목록 불러오기
     private void checkChatRoom() {
-        FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/"+myUid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/"+myUid).equalTo(true)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
@@ -317,6 +317,4 @@ public class MessageActivity extends AppCompatActivity {
         finish();
         overridePendingTransition(R.anim.fromleft, R.anim.toright);
     }
-
-
 }

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.example.sammaru.R;
 import com.example.sammaru.chat.MessageActivity;
 import com.example.sammaru.model.ProductModel;
+import com.example.sammaru.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -51,6 +53,7 @@ public class ProductListCustomerFragment extends Fragment {
     private String deliveryCompany = null;                  // 택배 회사 이름
     private String baseUrl = "https://tracker.delivery/#/"; // 배송 조회 기본 URL
 
+    private String address;
     private String uid;
 
     @Override
@@ -59,6 +62,20 @@ public class ProductListCustomerFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_product_list_customer, container, false);
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // 주소 설정
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                address = userModel.getAddress();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         // 플로팅 버튼 클릭 이벤트
         fab = rootView.findViewById(R.id.fragment_delivery_list_fab);
@@ -139,7 +156,7 @@ public class ProductListCustomerFragment extends Fragment {
                 // 서버에 저장할 데이터
 
                 // url 설정
-                ProductModel productModel = new ProductModel();
+                final ProductModel productModel = new ProductModel();
                 productModel.setUrl(baseUrl + deliveryCompany + number.getText().toString());
 
                 // 송장번호 설정
@@ -152,19 +169,7 @@ public class ProductListCustomerFragment extends Fragment {
                 String name = item.getText().toString();
                 productModel.setProductName(name);
 
-                String address = null;
 
-                FirebaseDatabase.getInstance().getReference().child("users").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
 
                 productModel.setAddress(address);
 
