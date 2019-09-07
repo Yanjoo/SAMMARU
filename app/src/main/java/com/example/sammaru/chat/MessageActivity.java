@@ -108,34 +108,34 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        ChatModel chatModel = new ChatModel();
-        chatModel.users.put(myUid, true);
-        chatModel.users.put(destinationUid, true);
-
-        if (chatRoomUid == null) {
-            FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    checkChatRoom();
-                }
-            });
-        }
-
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ChatModel.Comment comment = new ChatModel.Comment();
-                comment.uid = myUid;
-                comment.message = editText.getText().toString();
-                comment.timestamp = ServerValue.TIMESTAMP;
-                FirebaseDatabase.getInstance().getReference().child("chatrooms")
-                        .child(chatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                sendFcm();
-                                editText.setText("");
-                            }});
+                ChatModel chatModel = new ChatModel();
+                chatModel.users.put(myUid, true);
+                chatModel.users.put(destinationUid, true);
 
+                if (chatRoomUid == null) {
+                    FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            checkChatRoom();
+                        }
+                    });
+                } else {
+                    ChatModel.Comment comment = new ChatModel.Comment();
+                    comment.uid = myUid;
+                    comment.message = editText.getText().toString();
+                    comment.timestamp = ServerValue.TIMESTAMP;
+                    FirebaseDatabase.getInstance().getReference().child("chatrooms")
+                            .child(chatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            sendFcm();
+                            editText.setText("");
+                        }
+                    });
+                }
             }
         });
         checkChatRoom();
