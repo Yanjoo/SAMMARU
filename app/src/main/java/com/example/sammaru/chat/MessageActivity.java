@@ -1,5 +1,7 @@
 package com.example.sammaru.chat;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.sammaru.model.ChatModel;
@@ -94,7 +96,8 @@ public class MessageActivity extends AppCompatActivity {
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MessageActivity.this, "전화 기능 구현", Toast.LENGTH_SHORT).show();
+                Intent phoneIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + destinationUserModel.getPhone()));
+                startActivity(phoneIntent);
             }
         });
 
@@ -173,12 +176,12 @@ public class MessageActivity extends AppCompatActivity {
         notificationModel.data.text = editText.getText().toString();
         notificationModel.data.id = String.valueOf(destinationUserModel.getIdentifier());
 
-
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf8"), gson.toJson(notificationModel));
 
         Request request = new Request.Builder()
                 .header("Content-Type", "application/json")
-                .addHeader("Authorization", "key=AAAAUIpBwks:APA91bFyB0l4lo8_3fxZA-srAudzr3g6Kgyj2cQbJsIQgs9xIx2PfCoGi3kxK1Hv321a5F2heFURks8zJZkCVEBa3sAXi3XmtG-9KkZJOoBzJ_ptanLE35J9sAz4pO5OpwzGTdrflNNj")
+                .addHeader("Authorization", "key=AAAAUIpBwks:APA91bFyB0l4lo8_3fxZA-srAudzr3g6Kgyj2cQbJsIQgs9xIx2P" +
+                        "fCoGi3kxK1Hv321a5F2heFURks8zJZkCVEBa3sAXi3XmtG-9KkZJOoBzJ_ptanLE35J9sAz4pO5OpwzGTdrflNNj")
                 .url("https://fcm.googleapis.com/fcm/send")
                 .post(requestBody)
                 .build();
@@ -210,6 +213,7 @@ public class MessageActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     destinationUserModel = dataSnapshot.getValue(UserModel.class);
+                    name.setText(destinationUserModel.getName());
                     getMessageList();
                 }
 

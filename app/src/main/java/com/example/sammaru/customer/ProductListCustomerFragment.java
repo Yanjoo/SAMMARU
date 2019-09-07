@@ -152,6 +152,22 @@ public class ProductListCustomerFragment extends Fragment {
                 String name = item.getText().toString();
                 productModel.setProductName(name);
 
+                String address = null;
+
+                FirebaseDatabase.getInstance().getReference().child("users").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                productModel.setAddress(address);
+
                 // 택배 회사 설정
                 int startIndex = deliveryCompany.indexOf('.') + 1;
                 int endIndex = deliveryCompany.indexOf('/');
@@ -228,8 +244,8 @@ public class ProductListCustomerFragment extends Fragment {
                 }
             });
 
-            ((CustomViewHolder)holder).productName.setText("상품명");
-            ((CustomViewHolder)holder).number.setText("송장번호");
+            ((CustomViewHolder)holder).productName.setText(products.get(position).getProductName());
+            ((CustomViewHolder)holder).number.setText(products.get(position).getNumber());
             ((CustomViewHolder)holder).btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

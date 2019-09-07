@@ -13,22 +13,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/activity_join_courierImageView"
-                android:layout_width="141dp"
-                android:layout_height="157dp"
-                android:layout_marginLeft="40dp"
-                android:src="@drawable/courier"
-                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/activity_join_customerImageView"
-                android:layout_width="141dp"
-                android:layout_height="157dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="40dp"
-                android:src="@drawable/user"
-                />
+                <ImageView
+                    android:id="@+id/activity_join_courierImageView"
+                    android:layout_width="141dp"
+                    android:layout_height="157dp"
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/courier" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="택배원"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:id="@+id/activity_join_customerImageView"
+                    android:layout_width="141dp"
+                    android:layout_height="157dp"
+                    android:layout_marginRight="40dp"
+                    android:src="@drawable/user" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="고객"/>
+            </LinearLayout>
+
         </RelativeLayout>
     </LinearLayout>
 
