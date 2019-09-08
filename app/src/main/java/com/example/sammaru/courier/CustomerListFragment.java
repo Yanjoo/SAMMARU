@@ -169,8 +169,6 @@ public class CustomerListFragment extends Fragment {
 
                         }
                     });
-
-                    Toast.makeText(getActivity(), "배송 출발 알람 송신", Toast.LENGTH_SHORT).show();
                 }
             });
         }
