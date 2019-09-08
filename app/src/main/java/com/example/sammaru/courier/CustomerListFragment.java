@@ -18,15 +18,27 @@ import android.widget.Toast;
 
 import com.example.sammaru.R;
 import com.example.sammaru.chat.MessageActivity;
+import com.example.sammaru.model.NotificationModel;
 import com.example.sammaru.model.ProductModel;
+import com.example.sammaru.model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 고객 목록 프래그먼트
@@ -37,6 +49,7 @@ import java.util.List;
 public class CustomerListFragment extends Fragment {
 
     private String uid;
+    private UserModel destinationUserModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +63,44 @@ public class CustomerListFragment extends Fragment {
         recyclerView.setAdapter(new CustomerListFragmentAdapter());
 
         return rootView;
+    }
+
+    private void sendFcm(String productName) {
+        Gson gson = new Gson();
+
+        String userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
+        NotificationModel notificationModel = new NotificationModel();
+        notificationModel.to = destinationUserModel.pushToken;
+        notificationModel.notification.title = userName;
+        notificationModel.notification.text = productName + " 상품이 발송 중입니다.";
+        notificationModel.data.title = userName;
+        notificationModel.data.text = productName + " 상품이 발송 중입니다.";
+        notificationModel.data.id = String.valueOf(destinationUserModel.getIdentifier());
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf8"), gson.toJson(notificationModel));
+
+        Request request = new Request.Builder()
+                .header("Content-Type", "application/json")
+                .addHeader("Authorization", "key=AAAAUIpBwks:APA91bFyB0l4lo8_3fxZA-srAudzr3g6Kgyj2cQbJsIQgs9xIx2P" +
+                        "fCoGi3kxK1Hv321a5F2heFURks8zJZkCVEBa3sAXi3XmtG-9KkZJOoBzJ_ptanLE35J9sAz4pO5OpwzGTdrflNNj")
+                .url("https://fcm.googleapis.com/fcm/send")
+                .post(requestBody)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+            }
+        });
+
     }
 
     private class CustomerListFragmentAdapter extends RecyclerView.Adapter {
@@ -105,6 +156,20 @@ public class CustomerListFragment extends Fragment {
             ((CustomViewHolder)holder).bell.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    FirebaseDatabase.getInstance().getReference().child("users").child(products.get(position).getCustomerUid())
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            destinationUserModel = dataSnapshot.getValue(UserModel.class);
+                            sendFcm(products.get(position).getProductName());
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                     Toast.makeText(getActivity(), "배송 출발 알람 송신", Toast.LENGTH_SHORT).show();
                 }
             });
