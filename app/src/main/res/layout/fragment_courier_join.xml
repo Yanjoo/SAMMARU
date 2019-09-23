@@ -6,6 +6,19 @@
     android:orientation="vertical"
     tools:context=".login.CourierJoinFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="택배원 회원가입"
+        android:textSize="24dp"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#888888"
+        android:layout_marginBottom="4dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
