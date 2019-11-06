@@ -1,5 +1,6 @@
 package com.example.sammaru.chat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -84,12 +86,15 @@ public class MessageActivity extends AppCompatActivity {
         back = findViewById(R.id.activity_message_back);
         phone = findViewById(R.id.activity_message_phone);
 
+        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
         recyclerView = findViewById(R.id.activity_message_recyclerview);
 
         macro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MessageActivity.this, "매크로 기능 구현", Toast.LENGTH_SHORT).show();
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
             }
         });
 
