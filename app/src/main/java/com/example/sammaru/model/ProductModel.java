@@ -11,7 +11,7 @@ public class ProductModel {
     private String address;      // 고객 주소
     private String customerUid;  // 고객 uid
     private String courierUid;   // 배달원 uid
-    private String number;       // 송장번호
+    private String invoiceNumber;       // 송장번호
 
     public String getProductName() {
         return productName;
@@ -37,12 +37,12 @@ public class ProductModel {
         this.owner = owner;
     }
 
-    public String getNumber() {
-        return number;
+    public String getInvoiceNumber() {
+        return invoiceNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 
     public String getAddress() {

@@ -77,8 +77,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-
         // 파이어베이스 인증 객체 선언
         firebaseAuth = FirebaseAuth.getInstance();
 

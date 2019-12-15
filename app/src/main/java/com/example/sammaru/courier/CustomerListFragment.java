@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sammaru.R;
 import com.example.sammaru.chat.MessageActivity;
@@ -152,7 +151,8 @@ public class CustomerListFragment extends Fragment {
             });
 
             ((CustomViewHolder)holder).address.setText(products.get(position).getAddress());
-            ((CustomViewHolder)holder).number.setText("송장 번호 : " + products.get(position).getNumber());
+            ((CustomViewHolder)holder).number.setText("송장 번호 : " + products.get(position).getInvoiceNumber());
+            ((CustomViewHolder)holder).name.setText(products.get(position).getProductName());
             ((CustomViewHolder)holder).bell.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -182,6 +182,7 @@ public class CustomerListFragment extends Fragment {
 
             public TextView address;
             public TextView number;
+            public TextView name;
             public ImageView bell;
 
             public CustomViewHolder(@NonNull View itemView) {
@@ -190,6 +191,7 @@ public class CustomerListFragment extends Fragment {
                 address = itemView.findViewById(R.id.item_customer_info_address);
                 number = itemView.findViewById(R.id.item_customer_info_number);
                 bell = itemView.findViewById(R.id.item_customer_info_bell);
+                name = itemView.findViewById(R.id.item_customer_info_name);
             }
         }
     }

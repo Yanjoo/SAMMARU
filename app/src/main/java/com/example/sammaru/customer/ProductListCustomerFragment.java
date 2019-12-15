@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +54,8 @@ public class ProductListCustomerFragment extends Fragment {
 
     private String address;
     private String uid;
+
+    private EditText number; // 송장번호
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -140,7 +141,7 @@ public class ProductListCustomerFragment extends Fragment {
         });
 
         // 송장번호
-        final EditText number = view.findViewById(R.id.dialog_lookup_add_editText_number);
+        number = view.findViewById(R.id.dialog_lookup_add_editText_number);
 
         // 아이템 명
         final EditText item = view.findViewById(R.id.dialog_lookup_add_editText_item);
@@ -160,7 +161,7 @@ public class ProductListCustomerFragment extends Fragment {
                 productModel.setUrl(baseUrl + deliveryCompany + number.getText().toString());
 
                 // 송장번호 설정
-                productModel.setNumber(number.getText().toString());
+                productModel.setInvoiceNumber(number.getText().toString());
 
                 // uid 설정
                 productModel.setCustomerUid(uid);
@@ -168,9 +169,6 @@ public class ProductListCustomerFragment extends Fragment {
                 // 상품 이름 설정
                 String name = item.getText().toString();
                 productModel.setProductName(name);
-
-
-
                 productModel.setAddress(address);
 
                 // 택배 회사 설정
@@ -238,7 +236,9 @@ public class ProductListCustomerFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            ((CustomViewHolder)holder).productName.setText(products.get(position).getProductName());
+            ((CustomViewHolder)holder).number.setText(products.get(position).getInvoiceNumber());
+            ((CustomViewHolder)holder).btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), MessageActivity.class);
@@ -248,13 +248,14 @@ public class ProductListCustomerFragment extends Fragment {
                     startActivity(intent, activityOptions.toBundle());
                 }
             });
-
-            ((CustomViewHolder)holder).productName.setText(products.get(position).getProductName());
-            ((CustomViewHolder)holder).number.setText(products.get(position).getNumber());
-            ((CustomViewHolder)holder).btnDelete.setOnClickListener(new View.OnClickListener() {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getActivity(), "파이어베이스에서 삭제 해야됨", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(view.getContext(), LookUpActivity.class);
+                    intent.putExtra("destinationUrl", products.get(position).getUrl());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.fromright, R.anim.toleft);
+                    startActivity(intent, activityOptions.toBundle());
                 }
             });
         }
