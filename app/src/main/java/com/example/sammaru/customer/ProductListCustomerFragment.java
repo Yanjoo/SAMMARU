@@ -236,8 +236,8 @@ public class ProductListCustomerFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-            ((CustomViewHolder)holder).productName.setText(products.get(position).getProductName());
-            ((CustomViewHolder)holder).number.setText(products.get(position).getInvoiceNumber());
+            ((CustomViewHolder)holder).productName.setText("상품명 " + products.get(position).getProductName());
+            ((CustomViewHolder)holder).number.setText("송장번호 " + products.get(position).getInvoiceNumber());
             ((CustomViewHolder)holder).btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -55,10 +55,15 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/activity_join_frame_layout"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/activity_join_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+
 
 </LinearLayout>

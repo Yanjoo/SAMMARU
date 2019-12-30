@@ -105,8 +105,8 @@ public class LoginActivity extends AppCompatActivity {
                                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                                         UserModel userModel = item.getValue(UserModel.class);
 
-                                        Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                                         if (userModel.getUid().equals(uid)) {
+                                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                                             loginIdentifier = userModel.getIdentifier(); // 구분자 1: 고객, 2: 배달원
                                             chooseActivity(loginIdentifier);    // 구분자에 따른 메인 액티비티 선택
                                         }
