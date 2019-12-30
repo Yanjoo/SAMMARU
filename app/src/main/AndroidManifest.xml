@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sammaru">
+    package="com.cbnu.sammaru">
 
     <application
         android:allowBackup="true"
@@ -9,16 +9,16 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".customer.LookUpActivity"></activity>
+        <activity android:name="com.cbnu.sammaru.customer.LookUpActivity"></activity>
         <activity
-            android:name=".chat.MessageActivity"
+            android:name="com.cbnu.sammaru.chat.MessageActivity"
             android:label="@string/title_activity_message"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".customer.CustomerMainActivity" />
-        <activity android:name=".login.JoinActivity" />
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".courier.CourierMainActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name="com.cbnu.sammaru.customer.CustomerMainActivity" />
+        <activity android:name="com.cbnu.sammaru.login.JoinActivity" />
+        <activity android:name="com.cbnu.sammaru.login.LoginActivity" />
+        <activity android:name="com.cbnu.sammaru.courier.CourierMainActivity" />
+        <activity android:name="com.cbnu.sammaru.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +27,7 @@
         </activity>
 
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name="com.cbnu.sammaru.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
